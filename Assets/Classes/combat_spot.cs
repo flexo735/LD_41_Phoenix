@@ -5,6 +5,7 @@ using UnityEngine;
 public class combat_spot : card_spot 
 {
 	public GameObject currently_holding = null;
+	public bool player_spot = true; //Set false for AI controlled.
 	// Use this for initialization
 	void Start () 
 	{

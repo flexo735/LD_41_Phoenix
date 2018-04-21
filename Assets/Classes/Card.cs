@@ -40,6 +40,7 @@ public class Card : MonoBehaviour {
 
 	//Making card draggable//
 	private Vector3 offset;
+	public bool draggable;
 
 
 
@@ -100,14 +101,20 @@ public class Card : MonoBehaviour {
 
 	void OnMouseDown() 
 	{
-		offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
+		if (draggable)
+		{
+			offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
+		}
 	}
 
 	void OnMouseDrag()
 	{
-		Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
-		Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
-		transform.position = curPosition;
+		if (draggable)
+		{
+			Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
+			Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+			transform.position = curPosition;
+		}
 	}
 
 	void OnMouseUp()
@@ -119,15 +126,11 @@ public class Card : MonoBehaviour {
 			Collider2D[] items_overlapped = Physics2D.OverlapAreaAll(collider.bounds.min, collider.bounds.max);
 			foreach (Collider2D hit in items_overlapped)
 			{
-				if (hit.gameObject.GetComponent<combat_spot>() != null && hit.gameObject.GetComponent<combat_spot>().currently_holding == null)
+				if (hit.gameObject.GetComponent<combat_spot>() != null && hit.gameObject.GetComponent<combat_spot>().currently_holding == null && hit.gameObject.GetComponent<combat_spot>().player_spot)
 				{
 					//TODO: play the card to the combat spot, remove it from the player hand.
-					held_in.play_card(this.gameObject);
-					held_in = hit.gameObject.GetComponent<combat_spot>();
-					hit.gameObject.GetComponent<combat_spot>().currently_holding = this.gameObject;
-					current_state = card_states.Cooldown;
 					found_dropspot = true;
-					held_in.arrange_cards();
+					play_card_to_combat_spot(hit.gameObject.GetComponent<combat_spot>());
 					break;
 				}
 			}
@@ -144,5 +147,14 @@ public class Card : MonoBehaviour {
 		else{
 			held_in.arrange_cards();
 		}
+	}
+
+	void play_card_to_combat_spot(combat_spot the_spot)
+	{
+		held_in.play_card(this.gameObject);
+		held_in = the_spot;
+		the_spot.currently_holding = this.gameObject;
+		current_state = card_states.Cooldown;
+		held_in.arrange_cards();
 	}
 }

@@ -13,20 +13,16 @@ public class Player_Hand : card_spot {
 
 	private card_library our_cards;
 
+	public bool is_person = true; //Set to false if this is the AI and not the person.
+
 	// Use this for initialization
 	void Start () 
 	{
 		our_cards = gameObject.GetComponent<card_library>();
 
 		for (int counter = 0; counter < starting_hand_size; counter++){
-			GameObject new_card = Instantiate(basic_card_prefab);
-			Card card_object = new_card.GetComponent<Card>();
-			card_object.current_state = Card.card_states.Hand;
-			card_object.held_in = this;
-			card_object.assign_type(our_cards.master_card_list[Random.Range(0,our_cards.master_card_list.Count)]); //Assign the card a random type for now
-			current_hand.Add(new_card);
+			draw_card();
 		}
-		arrange_cards();
 	}
 	
 	// Update is called once per frame
@@ -53,5 +49,15 @@ public class Player_Hand : card_spot {
 		}
 	}
 
-
+	public void draw_card()
+	{
+		GameObject new_card = Instantiate(basic_card_prefab);
+		Card card_object = new_card.GetComponent<Card>();
+		card_object.current_state = Card.card_states.Hand;
+		card_object.held_in = this;
+		card_object.assign_type(our_cards.master_card_list[Random.Range(0,our_cards.master_card_list.Count)]); //Assign the card a random type for now
+		current_hand.Add(new_card);
+		card_object.draggable = is_person;
+		arrange_cards();
+	}
 }
