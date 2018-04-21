@@ -31,6 +31,7 @@ public class Card : MonoBehaviour {
 	public Text defence_time_text;
 	public Text casting_time_text;
 	public Text flavour_text_text;
+	public Text timer_text;
 
 	public enum card_states {Hand,Waiting,Attacking,Cooldown};
 	[SerializeField]
@@ -42,8 +43,8 @@ public class Card : MonoBehaviour {
 	private Vector3 offset;
 	public bool draggable;
 
-
-
+	//Card timing variables//
+	private float time_left = 0;
 
 	// Use this for initialization
 	void Start () 
@@ -54,7 +55,19 @@ public class Card : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		
+		if (current_state == card_states.Cooldown)
+		{
+			time_left -= Time.deltaTime;
+			if (time_left <= 0)
+			{
+				current_state = card_states.Waiting;
+				timer_text.text = "";
+			}
+			else
+			{
+				timer_text.text = time_left.ToString("#.0") + " Seconds";
+			}
+		}
 	}
 
 	public void assign_type(raw_card_stats this_card_type)
@@ -101,7 +114,7 @@ public class Card : MonoBehaviour {
 
 	void OnMouseDown() 
 	{
-		if (draggable)
+		if (draggable && (current_state == card_states.Waiting || current_state == card_states.Hand))
 		{
 			offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
 		}
@@ -109,7 +122,7 @@ public class Card : MonoBehaviour {
 
 	void OnMouseDrag()
 	{
-		if (draggable)
+		if (draggable && (current_state == card_states.Waiting || current_state == card_states.Hand))
 		{
 			Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
 			Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
@@ -142,6 +155,7 @@ public class Card : MonoBehaviour {
 		}
 
 		else if (current_state == card_states.Waiting){
+			held_in.arrange_cards();
 			//TODO: Check to see if we're being assigned to another creature or face. If so, start attacking, defending, ect.
 		}
 		else{
@@ -155,6 +169,7 @@ public class Card : MonoBehaviour {
 		held_in = the_spot;
 		the_spot.currently_holding = this.gameObject;
 		current_state = card_states.Cooldown;
+		time_left = casting_time;
 		held_in.arrange_cards();
 	}
 }
