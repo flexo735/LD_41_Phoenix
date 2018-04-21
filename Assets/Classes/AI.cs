@@ -8,7 +8,6 @@ public class AI : Player_Hand {
 	public float decisionUncertainty = 1.0f;
 	public float decisionTimer = 0.0f;
 	float timeUntilNextDecision = 0.0f;
-	AIDecision choice = AIDecision.none;
 
 	public List<combat_spot> player_Spots;
 	public List<combat_spot> AI_Spots;
