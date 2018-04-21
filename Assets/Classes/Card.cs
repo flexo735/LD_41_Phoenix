@@ -46,6 +46,9 @@ public class Card : MonoBehaviour {
 	//Card timing variables//
 	private float time_left = 0;
 
+	//Attacking object holder//
+	Player_Hand attack_target = null;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -61,6 +64,21 @@ public class Card : MonoBehaviour {
 			if (time_left <= 0)
 			{
 				current_state = card_states.Waiting;
+				timer_text.text = "";
+			}
+			else
+			{
+				timer_text.text = time_left.ToString("#.0") + " Seconds";
+			}
+		}
+
+		else if (current_state == card_states.Attacking)
+		{
+			time_left -= Time.deltaTime;
+			if (time_left <= 0)
+			{
+				current_state = card_states.Waiting;
+				finish_attack(attack_target);
 				timer_text.text = "";
 			}
 			else
@@ -155,7 +173,18 @@ public class Card : MonoBehaviour {
 		}
 
 		else if (current_state == card_states.Waiting){
-			held_in.arrange_cards();
+			BoxCollider2D collider = gameObject.GetComponent<BoxCollider2D>();
+			Collider2D[] items_overlapped = Physics2D.OverlapAreaAll(collider.bounds.min, collider.bounds.max);
+			foreach (Collider2D hit in items_overlapped)
+			{
+				if (hit.tag == "Health_Node" && hit.transform.parent.gameObject.GetComponent<Player_Hand>() != null && !hit.transform.parent.gameObject.GetComponent<Player_Hand>().is_person)
+				{
+					start_attack(hit.transform.parent.gameObject.GetComponent<Player_Hand>());
+					break;
+				}
+			}
+
+			held_in.arrange_cards(); // Always arrange yourself so you snap back to your attack point and begin attacking.
 			//TODO: Check to see if we're being assigned to another creature or face. If so, start attacking, defending, ect.
 		}
 		else{
@@ -171,5 +200,17 @@ public class Card : MonoBehaviour {
 		current_state = card_states.Cooldown;
 		time_left = casting_time;
 		held_in.arrange_cards();
+	}
+
+	void start_attack(Player_Hand the_target)
+	{
+		current_state = card_states.Attacking;
+		time_left = attack_time;
+		attack_target = the_target;
+	}
+
+	void finish_attack(Player_Hand the_target)
+	{
+		the_target.take_damage(attack_power);
 	}
 }
