@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player_Hand : card_spot {
 
@@ -18,9 +19,13 @@ public class Player_Hand : card_spot {
 
 	public bool is_person = true; //Set to false if this is the AI and not the person.
 
+	public Text health_text;
+
 	// Use this for initialization
 	void Start () 
 	{
+		health_text.text = "Health: " + health_value.ToString();
+
 		our_cards = gameObject.GetComponent<card_library>();
 
 		for (int counter = 0; counter < starting_hand_size; counter++){
@@ -67,5 +72,6 @@ public class Player_Hand : card_spot {
 	public void take_damage(int amount)
 	{
 		health_value -= amount;
+		health_text.text = "Health: " + health_value.ToString();
 	}
 }
