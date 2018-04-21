@@ -15,6 +15,11 @@ public class Card : MonoBehaviour {
 	public float defence_time;
 	public float casting_time;
 
+	public card_types type;
+
+	public SpriteRenderer card_art;
+	public SpriteRenderer type_art;
+
 	public enum card_states {Hand,Waiting,Attacking,Cooldown};
 	[SerializeField]
 	public card_states current_state;
@@ -23,6 +28,8 @@ public class Card : MonoBehaviour {
 
 	//Making card draggable//
 	private Vector3 offset;
+
+
 
 
 	// Use this for initialization
@@ -35,6 +42,21 @@ public class Card : MonoBehaviour {
 	void Update () 
 	{
 		
+	}
+
+	public void assign_type(raw_card_stats this_card_type)
+	{
+		this.attack_power = this_card_type.attack_power;
+		this.defence_power = this_card_type.defence_power;
+		this.health = this_card_type.health;
+		this.attack_time = this_card_type.attack_time;
+		this.defence_time = this_card_type.defence_time;
+		this.casting_time = this_card_type.casting_time;
+
+		card_art.sprite = this_card_type.card_art;
+		type_art.sprite = this_card_type.type_art;
+
+		type = this_card_type.type;
 	}
 
 	void OnMouseDown() 

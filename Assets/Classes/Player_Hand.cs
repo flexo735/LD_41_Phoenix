@@ -11,18 +11,22 @@ public class Player_Hand : card_spot {
 	public float xoffset_per_card = 0.5f;
 	public int starting_hand_size = 6;
 
+	private card_library our_cards;
+
 	// Use this for initialization
 	void Start () 
 	{
+		our_cards = gameObject.GetComponent<card_library>();
+
 		for (int counter = 0; counter < starting_hand_size; counter++){
 			GameObject new_card = Instantiate(basic_card_prefab);
-			new_card.GetComponent<Card>().current_state = Card.card_states.Hand;
-			new_card.GetComponent<Card>().held_in = this;
+			Card card_object = new_card.GetComponent<Card>();
+			card_object.current_state = Card.card_states.Hand;
+			card_object.held_in = this;
+			card_object.assign_type(our_cards.master_card_list[Random.Range(0,our_cards.master_card_list.Count-1)]); //Assign the card a random type for now
 			current_hand.Add(new_card);
 		}
 		arrange_cards();
-		//TODO: instantiate a bunch of cards at the start of the game
-		//TODO: add a "Draw" method that draws cards from the side of the board instead of just instantiating them in your hand.
 	}
 	
 	// Update is called once per frame
