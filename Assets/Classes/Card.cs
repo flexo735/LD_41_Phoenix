@@ -48,6 +48,7 @@ public class Card : MonoBehaviour {
 
 	//Attacking object holder//
 	Player_Hand attack_target = null;
+	public Player_Hand controlling_player;
 
 	// Use this for initialization
 	void Start () 
@@ -194,19 +195,24 @@ public class Card : MonoBehaviour {
 
 	public void play_card_to_combat_spot(combat_spot the_spot)
 	{
-		held_in.play_card(this.gameObject);
-		held_in = the_spot;
-		the_spot.currently_holding = this.gameObject;
-		current_state = card_states.Cooldown;
-		time_left = casting_time;
-		held_in.arrange_cards();
+		if (held_in.play_card(this.gameObject))
+		{
+			held_in = the_spot;
+			the_spot.currently_holding = this.gameObject;
+			current_state = card_states.Cooldown;
+			time_left = casting_time;
+			held_in.arrange_cards();
+		}
 	}
 
 	void start_attack(Player_Hand the_target)
 	{
-		current_state = card_states.Attacking;
-		time_left = attack_time;
-		attack_target = the_target;
+		if (!controlling_player.locked_out)
+		{
+			current_state = card_states.Attacking;
+			time_left = attack_time;
+			attack_target = the_target;
+		}
 	}
 
 	void finish_attack(Player_Hand the_target)

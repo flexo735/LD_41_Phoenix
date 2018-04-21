@@ -15,7 +15,7 @@ public class AI : Player_Hand {
 
 	// when the AI decides to draw a card
 	public void AIDraw(){
-		draw_card();
+		draw_card(true);
 
 		// todo: set the correct cooldown from drawing a card
 		decisionTimer = 1.0f;
@@ -143,7 +143,7 @@ public class AI : Player_Hand {
 		our_cards = gameObject.GetComponent<card_library>();
 
 		for (int counter = 0; counter < starting_hand_size; counter++){
-			draw_card();
+			draw_card(false);
 		}
 
 		timeUntilNextDecision = Time.time + startDelay;

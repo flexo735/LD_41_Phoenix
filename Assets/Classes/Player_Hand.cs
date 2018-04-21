@@ -21,6 +21,9 @@ public class Player_Hand : card_spot {
 
 	public Text health_text;
 
+	public bool locked_out = false;
+	private float lockout_time;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -29,20 +32,36 @@ public class Player_Hand : card_spot {
 		our_cards = gameObject.GetComponent<card_library>();
 
 		for (int counter = 0; counter < starting_hand_size; counter++){
-			draw_card();
+			draw_card(false);
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		
+		lockout_time -= Time.deltaTime;
+		if (locked_out && lockout_time <=0)
+		{
+			locked_out = false;
+		}
 	}
 
-	public override void play_card(GameObject the_card)
+	public override bool play_card(GameObject the_card)
 	{
-		current_hand.Remove(the_card);
-		arrange_cards();
+		if (!locked_out)
+		{
+			locked_out = true;
+			lockout_time = the_card.GetComponent<Card>().casting_time;
+			current_hand.Remove(the_card);
+			arrange_cards();
+			return true;
+		}
+		else
+		{
+			arrange_cards();
+			return false;
+		}
+
 	}
 
 	public override void arrange_cards() //Take all of the cards currently in our hand and arrange them.
@@ -57,16 +76,26 @@ public class Player_Hand : card_spot {
 		}
 	}
 
-	public void draw_card()
+	public void draw_card(bool lock_out_after)
 	{
-		GameObject new_card = Instantiate(basic_card_prefab);
-		Card card_object = new_card.GetComponent<Card>();
-		card_object.current_state = Card.card_states.Hand;
-		card_object.held_in = this;
-		card_object.assign_type(our_cards.master_card_list[Random.Range(0,our_cards.master_card_list.Count)]); //Assign the card a random type for now
-		current_hand.Add(new_card);
-		card_object.draggable = is_person;
-		arrange_cards();
+		if (!locked_out)
+		{
+			GameObject new_card = Instantiate(basic_card_prefab);
+			Card card_object = new_card.GetComponent<Card>();
+			card_object.current_state = Card.card_states.Hand;
+			card_object.held_in = this;
+			card_object.assign_type(our_cards.master_card_list[Random.Range(0,our_cards.master_card_list.Count)]); //Assign the card a random type for now
+			current_hand.Add(new_card);
+			card_object.draggable = is_person;
+			card_object.controlling_player = this;
+			arrange_cards();
+
+			if (lock_out_after)
+			{
+				locked_out = true;
+				lockout_time = 4.0f;
+			}
+		}
 	}
 
 	public void take_damage(int amount)

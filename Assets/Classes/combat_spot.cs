@@ -26,8 +26,9 @@ public class combat_spot : card_spot
 		}
 	}
 
-	public override void play_card(GameObject the_card)
+	public override bool play_card(GameObject the_card)
 	{
+		return true;
 		//TODO: Do something when this card is played
 	}
 }

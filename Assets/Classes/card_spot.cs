@@ -18,7 +18,7 @@ public abstract class card_spot : MonoBehaviour {
 
 	}
 
-	virtual public void play_card(GameObject the_card){
-		
+	virtual public bool play_card(GameObject the_card){
+		return true;
 	}
 }
