@@ -51,7 +51,28 @@ public class Card : MonoBehaviour {
 	void OnMouseUp()
 	{
 		if (current_state == card_states.Hand){
-			held_in.arrange_cards();
+			//We check to see if we've been dropped on a combat hotspot.
+			bool found_dropspot = false;
+			BoxCollider2D collider = gameObject.GetComponent<BoxCollider2D>();
+			Collider2D[] items_overlapped = Physics2D.OverlapAreaAll(collider.bounds.min, collider.bounds.max);
+			foreach (Collider2D hit in items_overlapped)
+			{
+				if (hit.gameObject.GetComponent<combat_spot>() != null && hit.gameObject.GetComponent<combat_spot>().currently_holding == null)
+				{
+					//TODO: play the card to the combat spot, remove it from the player hand.
+					held_in.play_card(this.gameObject);
+					held_in = null;
+					hit.gameObject.GetComponent<combat_spot>().currently_holding = this;
+					current_state = card_states.Cooldown;
+					found_dropspot = true;
+					this.gameObject.transform.position = hit.gameObject.transform.position;
+					break;
+				}
+			}
+			if (!found_dropspot)
+			{
+				held_in.arrange_cards();
+			}
 			//TODO: Check to see if we're in the play area of the map. In that case play the card, remove it from your hand and and assign it to a different holder to arrange.
 		}
 

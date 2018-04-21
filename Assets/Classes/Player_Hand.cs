@@ -31,6 +31,12 @@ public class Player_Hand : MonoBehaviour {
 		
 	}
 
+	public void play_card(GameObject the_card)
+	{
+		current_hand.Remove(the_card);
+		arrange_cards();
+	}
+
 	public void arrange_cards() //Take all of the cards currently in our hand and arrange them.
 	{
 		int counter = 0;
