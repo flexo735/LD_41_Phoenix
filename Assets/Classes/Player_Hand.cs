@@ -23,7 +23,7 @@ public class Player_Hand : card_spot {
 			Card card_object = new_card.GetComponent<Card>();
 			card_object.current_state = Card.card_states.Hand;
 			card_object.held_in = this;
-			card_object.assign_type(our_cards.master_card_list[Random.Range(0,our_cards.master_card_list.Count-1)]); //Assign the card a random type for now
+			card_object.assign_type(our_cards.master_card_list[Random.Range(0,our_cards.master_card_list.Count)]); //Assign the card a random type for now
 			current_hand.Add(new_card);
 		}
 		arrange_cards();
