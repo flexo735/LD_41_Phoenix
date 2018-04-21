@@ -569,7 +569,7 @@ MonoBehaviour:
     attack_time: 2
     defence_time: 2
     casting_time: 2
-    card_art: {fileID: 21300000, guid: b7a5291d45452cb42a5462f04fd6871b, type: 3}
+    card_art: {fileID: 21300000, guid: 49a395f8367e90d43a9ec0e687579e07, type: 3}
     type: 3
     type_art: {fileID: 21300000, guid: 9992740a5e2654a42a43fd777959c0db, type: 3}
   - name: Manspider
@@ -580,7 +580,7 @@ MonoBehaviour:
     attack_time: 5
     defence_time: 2
     casting_time: 3
-    card_art: {fileID: 21300000, guid: e5d4217529cc74f4ab11003bc036de6a, type: 3}
+    card_art: {fileID: 21300000, guid: 92803092250d1dc4c802dd225ee78976, type: 3}
     type: 4
     type_art: {fileID: 21300000, guid: 22d89a9821d99284a95347920c253a1d, type: 3}
   - name: Dragon
@@ -591,7 +591,139 @@ MonoBehaviour:
     attack_time: 8
     defence_time: 4
     casting_time: 4
-    card_art: {fileID: 21300000, guid: 77686b34629582447843e9e3f7161ff9, type: 3}
+    card_art: {fileID: 21300000, guid: ce95eaac3ff659144843861bc7f766b6, type: 3}
+    type: 2
+    type_art: {fileID: 21300000, guid: a3f4a6fe40fbc434186008cc3f4c68d8, type: 3}
+  - name: Bearnostorm
+    flavour_text: '"The ice caps are melting, but he''s still cool"'
+    attack_power: 5
+    defence_power: 3
+    health: 10
+    attack_time: 7
+    defence_time: 4
+    casting_time: 4
+    card_art: {fileID: 21300000, guid: 9eec266ba65faa54a9e7fca2498955eb, type: 3}
+    type: 0
+    type_art: {fileID: 21300000, guid: d0f6cfe093ec8944c9205c7bf27a4915, type: 3}
+  - name: Bearstorm
+    flavour_text: '"He just looks like a few dots to me"'
+    attack_power: 3
+    defence_power: 7
+    health: 9
+    attack_time: 6
+    defence_time: 5
+    casting_time: 4
+    card_art: {fileID: 21300000, guid: 852e0c578e5fb87498b49221289bdd48, type: 3}
+    type: 0
+    type_art: {fileID: 21300000, guid: d0f6cfe093ec8944c9205c7bf27a4915, type: 3}
+  - name: Cookie of Courage
+    flavour_text: '"You need a lot of courage to eat a lot of cookies"'
+    attack_power: 1
+    defence_power: 8
+    health: 1
+    attack_time: 2
+    defence_time: 3
+    casting_time: 6
+    card_art: {fileID: 21300000, guid: d858900995509394e9200d23b1a769fa, type: 3}
+    type: 3
+    type_art: {fileID: 21300000, guid: 9992740a5e2654a42a43fd777959c0db, type: 3}
+  - name: Dead Gazebo
+    flavour_text: '"Will you awaken the gazebo?"'
+    attack_power: 2
+    defence_power: 10
+    health: 10
+    attack_time: 8
+    defence_time: 3
+    casting_time: 10
+    card_art: {fileID: 21300000, guid: 6485c1e98672dc24dac694933aff80b5, type: 3}
+    type: 4
+    type_art: {fileID: 21300000, guid: 22d89a9821d99284a95347920c253a1d, type: 3}
+  - name: Goldfish
+    flavour_text: '"Blub blub"'
+    attack_power: 5
+    defence_power: 3
+    health: 2
+    attack_time: 8
+    defence_time: 4
+    casting_time: 4
+    card_art: {fileID: 21300000, guid: 4adae47cbf581954ba93f6d71ee7316a, type: 3}
+    type: 5
+    type_art: {fileID: 21300000, guid: b927cd2d5d2ca5049b8e758126b45278, type: 3}
+  - name: Magman
+    flavour_text: '"Fire me? You can''t fi-aaaaaugha!"'
+    attack_power: 6
+    defence_power: 7
+    health: 6
+    attack_time: 8
+    defence_time: 4
+    casting_time: 4
+    card_art: {fileID: 21300000, guid: 83f32fdf1f14fae498001153b54b6569, type: 3}
+    type: 2
+    type_art: {fileID: 21300000, guid: a3f4a6fe40fbc434186008cc3f4c68d8, type: 3}
+  - name: Mosquito
+    flavour_text: '"Bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"'
+    attack_power: 1
+    defence_power: 0
+    health: 1
+    attack_time: 1
+    defence_time: 1
+    casting_time: 1
+    card_art: {fileID: 21300000, guid: ae59aa8e79c68d24b924607817f671f5, type: 3}
+    type: 6
+    type_art: {fileID: 21300000, guid: 2f325fe7c0bf1d8428cd30c75b3bc273, type: 3}
+  - name: Whirlywind
+    flavour_text: '"Right round, baby!"'
+    attack_power: 5
+    defence_power: 5
+    health: 3
+    attack_time: 2
+    defence_time: 2
+    casting_time: 8
+    card_art: {fileID: 21300000, guid: 873b7bd76a5f9bd42bac5ccdf73a2beb, type: 3}
+    type: 6
+    type_art: {fileID: 21300000, guid: 2f325fe7c0bf1d8428cd30c75b3bc273, type: 3}
+  - name: Generic Vine Monster
+    flavour_text: '"It''s a mess."'
+    attack_power: 2
+    defence_power: 6
+    health: 4
+    attack_time: 8
+    defence_time: 3
+    casting_time: 4
+    card_art: {fileID: 21300000, guid: 3a33076fcef1db946a3e6520698b7488, type: 3}
+    type: 4
+    type_art: {fileID: 21300000, guid: 22d89a9821d99284a95347920c253a1d, type: 3}
+  - name: William Eagleson
+    flavour_text: '"Zap! Zap! ZAAAAAAP!!!"'
+    attack_power: 6
+    defence_power: 5
+    health: 5
+    attack_time: 6
+    defence_time: 4
+    casting_time: 5
+    card_art: {fileID: 21300000, guid: b2a8663e462ebff4783375e9d54264d2, type: 3}
+    type: 1
+    type_art: {fileID: 21300000, guid: 95010cb23f1778a4f83106f9434dd8ae, type: 3}
+  - name: Slender Lightning Man
+    flavour_text: '"He''s a bit thin."'
+    attack_power: 3
+    defence_power: 6
+    health: 8
+    attack_time: 3
+    defence_time: 6
+    casting_time: 4
+    card_art: {fileID: 21300000, guid: f02e7e8a447c7d7458e092d3402dc19a, type: 3}
+    type: 1
+    type_art: {fileID: 21300000, guid: 95010cb23f1778a4f83106f9434dd8ae, type: 3}
+  - name: A Log Gator
+    flavour_text: '"I''m 110% sure that''s just a log. Plus or minus a few."'
+    attack_power: 6
+    defence_power: 5
+    health: 8
+    attack_time: 8
+    defence_time: 4
+    casting_time: 4
+    card_art: {fileID: 21300000, guid: 524bb22e77fd9cd4e81bd0135d5047ea, type: 3}
     type: 2
     type_art: {fileID: 21300000, guid: a3f4a6fe40fbc434186008cc3f4c68d8, type: 3}
 --- !u!1 &974956845 stripped
