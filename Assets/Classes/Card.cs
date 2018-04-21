@@ -16,6 +16,7 @@ public class Card : MonoBehaviour {
 	public float casting_time;
 
 	public enum card_states {Hand,Waiting,Attacking,Cooldown};
+	[SerializeField]
 	public card_states current_state;
 
 	public card_spot held_in;
