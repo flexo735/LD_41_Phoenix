@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class combat_spot : MonoBehaviour 
+public class combat_spot : card_spot 
 {
-	public Card currently_holding = null;
+	public GameObject currently_holding = null;
 	// Use this for initialization
 	void Start () 
 	{
@@ -15,5 +15,18 @@ public class combat_spot : MonoBehaviour
 	void Update () 
 	{
 		
+	}
+
+	public override void arrange_cards()
+	{
+		if (currently_holding != null)
+		{
+			currently_holding.transform.position = this.transform.position;
+		}
+	}
+
+	public override void play_card(GameObject the_card)
+	{
+		//TODO: Do something when this card is played
 	}
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Hand : MonoBehaviour {
+public class Player_Hand : card_spot {
 
 	public GameObject basic_card_prefab;
 
@@ -31,13 +31,13 @@ public class Player_Hand : MonoBehaviour {
 		
 	}
 
-	public void play_card(GameObject the_card)
+	public override void play_card(GameObject the_card)
 	{
 		current_hand.Remove(the_card);
 		arrange_cards();
 	}
 
-	public void arrange_cards() //Take all of the cards currently in our hand and arrange them.
+	public override void arrange_cards() //Take all of the cards currently in our hand and arrange them.
 	{
 		int counter = 0;
 		foreach (GameObject next_card in current_hand)

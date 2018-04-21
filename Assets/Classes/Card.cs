@@ -18,7 +18,7 @@ public class Card : MonoBehaviour {
 	public enum card_states {Hand,Waiting,Attacking,Cooldown};
 	public card_states current_state;
 
-	public Player_Hand held_in;
+	public card_spot held_in;
 
 	//Making card draggable//
 	private Vector3 offset;
@@ -61,11 +61,11 @@ public class Card : MonoBehaviour {
 				{
 					//TODO: play the card to the combat spot, remove it from the player hand.
 					held_in.play_card(this.gameObject);
-					held_in = null;
-					hit.gameObject.GetComponent<combat_spot>().currently_holding = this;
+					held_in = hit.gameObject.GetComponent<combat_spot>();
+					hit.gameObject.GetComponent<combat_spot>().currently_holding = this.gameObject;
 					current_state = card_states.Cooldown;
 					found_dropspot = true;
-					this.gameObject.transform.position = hit.gameObject.transform.position;
+					held_in.arrange_cards();
 					break;
 				}
 			}
@@ -78,6 +78,9 @@ public class Card : MonoBehaviour {
 
 		else if (current_state == card_states.Waiting){
 			//TODO: Check to see if we're being assigned to another creature or face. If so, start attacking, defending, ect.
+		}
+		else{
+			held_in.arrange_cards();
 		}
 	}
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class card_spot : MonoBehaviour {
+public abstract class card_spot : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -11,6 +11,14 @@ public class card_spot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+	}
+
+	virtual public void arrange_cards(){
+
+	}
+
+	virtual public void play_card(GameObject the_card){
 		
 	}
 }
