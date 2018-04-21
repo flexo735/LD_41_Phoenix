@@ -13,6 +13,9 @@ public class Player_Hand : card_spot {
 
 	private card_library our_cards;
 
+	public int health_value = 50;
+	public GameObject health_node;
+
 	public bool is_person = true; //Set to false if this is the AI and not the person.
 
 	// Use this for initialization
@@ -59,5 +62,10 @@ public class Player_Hand : card_spot {
 		current_hand.Add(new_card);
 		card_object.draggable = is_person;
 		arrange_cards();
+	}
+
+	public void take_damage(int amount)
+	{
+		health_value -= amount;
 	}
 }
