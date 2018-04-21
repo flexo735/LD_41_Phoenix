@@ -163,7 +163,7 @@ public class Card : MonoBehaviour {
 		}
 	}
 
-	void play_card_to_combat_spot(combat_spot the_spot)
+	public void play_card_to_combat_spot(combat_spot the_spot)
 	{
 		held_in.play_card(this.gameObject);
 		held_in = the_spot;

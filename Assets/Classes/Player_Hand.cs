@@ -11,7 +11,7 @@ public class Player_Hand : card_spot {
 	public float xoffset_per_card = 0.5f;
 	public int starting_hand_size = 6;
 
-	private card_library our_cards;
+	protected card_library our_cards;
 
 	public bool is_person = true; //Set to false if this is the AI and not the person.
 
