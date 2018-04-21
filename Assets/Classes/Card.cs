@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(BoxCollider2D))]
 
@@ -19,6 +20,17 @@ public class Card : MonoBehaviour {
 
 	public SpriteRenderer card_art;
 	public SpriteRenderer type_art;
+
+	public Canvas textCanvas;
+
+	public Text name_text;
+	public Text attack_power_text;
+	public Text defence_power_text;
+	public Text health_text;
+	public Text attack_time_text;
+	public Text defence_time_text;
+	public Text casting_time_text;
+	public Text flavour_text_text;
 
 	public enum card_states {Hand,Waiting,Attacking,Cooldown};
 	[SerializeField]
@@ -57,6 +69,33 @@ public class Card : MonoBehaviour {
 		type_art.sprite = this_card_type.type_art;
 
 		type = this_card_type.type;
+
+		this.attack_power_text.text = "" + this.attack_power;
+		this.defence_power_text.text = "" + this.defence_power;
+		this.health_text.text = "" + this.health;
+		this.attack_time_text.text = "" + this.attack_time;
+		this.defence_time_text.text = "" + this.defence_time;
+		this.casting_time_text.text = "" + this.casting_time; 
+
+		this.name_text.text = this_card_type.name;
+		name = this_card_type.name + "_card";
+		this.flavour_text_text.text = this_card_type.flavour_text;
+	}
+
+	void OnMouseEnter(){
+		transform.localScale = new Vector3(2.0f, 2.0f, 1.0f);
+		GetComponent<SpriteRenderer>().sortingOrder = 3;
+		card_art.sortingOrder = 3;
+		type_art.sortingOrder = 4;
+		textCanvas.sortingOrder = 4;
+	}
+
+	void OnMouseExit(){
+		transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+		GetComponent<SpriteRenderer>().sortingOrder = 1;
+		card_art.sortingOrder = 1;
+		type_art.sortingOrder = 2;
+		textCanvas.sortingOrder = 2;
 	}
 
 	void OnMouseDown() 
