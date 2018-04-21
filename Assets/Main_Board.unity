@@ -266,7 +266,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 107507766}
-  - component: {fileID: 107507767}
+  - component: {fileID: 107507764}
   - component: {fileID: 107507768}
   m_Layer: 0
   m_Name: Enemy
@@ -275,6 +275,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &107507764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 107507763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 880972ec55b36634687c78093c89e96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basic_card_prefab: {fileID: 1751776332428916, guid: af77aa69cf4ef4c479d29152eb72e1af,
+    type: 2}
+  current_hand: []
+  xoffset_per_card: 2
+  starting_hand_size: 6
+  health_value: 50
+  health_node: {fileID: 130036188}
+  is_person: 0
+  health_text: {fileID: 1385613284}
+  startDelay: 7
+  decisionDelay: 1
+  decisionUncertainty: 1
+  decisionTimer: 0
+  player_Spots:
+  - {fileID: 171769961}
+  - {fileID: 2058833192}
+  - {fileID: 61515959}
+  - {fileID: 974956846}
+  - {fileID: 25296248}
+  AI_Spots:
+  - {fileID: 236237037}
+  - {fileID: 1999726817}
+  - {fileID: 1379515756}
+  - {fileID: 1287294001}
+  - {fileID: 1205620266}
 --- !u!4 &107507766
 Transform:
   m_ObjectHideFlags: 0
@@ -289,26 +325,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
---- !u!114 &107507767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 107507763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9af83f6b563d2d045a3057e77ac18178, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  basic_card_prefab: {fileID: 1751776332428916, guid: af77aa69cf4ef4c479d29152eb72e1af,
-    type: 2}
-  current_hand: []
-  xoffset_per_card: 2
-  starting_hand_size: 6
-  health_value: 50
-  health_node: {fileID: 130036188}
-  is_person: 0
-  health_text: {fileID: 1385613284}
 --- !u!114 &107507768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -865,7 +881,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 469504280}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalPosition: {x: 0, y: 0, z: -500}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

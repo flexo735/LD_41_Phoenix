@@ -138,18 +138,13 @@ public class AI : Player_Hand {
 	}
 
 	void Start(){
+		health_text.text = "Health: " + health_value.ToString();
+
 		our_cards = gameObject.GetComponent<card_library>();
 
 		for (int counter = 0; counter < starting_hand_size; counter++){
-			GameObject new_card = Instantiate(basic_card_prefab);
-			Card card_object = new_card.GetComponent<Card>();
-			card_object.current_state = Card.card_states.Hand;
-			card_object.held_in = this;
-			card_object.assign_type(our_cards.master_card_list[Random.Range(0,our_cards.master_card_list.Count)]); //Assign the card a random type for now
-			current_hand.Add(new_card);
+			draw_card();
 		}
-
-		arrange_cards();
 
 		timeUntilNextDecision = Time.time + startDelay;
 		is_person = false;
