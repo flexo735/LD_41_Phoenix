@@ -22,6 +22,8 @@ public class menu_controller : MonoBehaviour {
 		cards = new List<GameObject>();
 	}
 
+
+	// Spawn some cards and make 'em spin!!
 	public void FixedUpdate(){
 		cardTimer--;
 		if(cardTimer < 0){
@@ -31,7 +33,7 @@ public class menu_controller : MonoBehaviour {
 			Card card_object = new_card.GetComponent<Card>();
 			card_object.current_state = Card.card_states.Hand;
 			card_object.assign_type(library.master_card_list[Random.Range(0, library.master_card_list.Count)]);
-			new_card.transform.SetPositionAndRotation(new Vector3(menuCamera.aspect * menuCamera.orthographicSize + 1, 0.0f, 0.0f), Quaternion.identity);
+			new_card.transform.SetPositionAndRotation(new Vector3(menuCamera.aspect * menuCamera.orthographicSize + 1, -1.0f, 0.0f), Quaternion.identity);
 			cards.Add(new_card);
 		}
 		for(int i = 0; i < cards.Count; i++){

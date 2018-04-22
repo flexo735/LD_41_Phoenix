@@ -9,8 +9,10 @@ public class AI : Player_Hand {
 	public float decisionTimer = 0.0f;
 	float timeUntilNextDecision = 0.0f;
 
-	public List<combat_spot> player_Spots;
-	public List<combat_spot> AI_Spots;
+	public List<combat_spot> player_Attack_Spots;
+	public List<combat_spot> player_Defend_Spots;
+	public List<combat_spot> AI_Attack_Spots;
+	public List<combat_spot> AI_Defend_Spots;
 
 	// when the AI decides to draw a card
 	public void AIDraw(){
@@ -19,19 +21,33 @@ public class AI : Player_Hand {
 		decisionTimer = 4.0f;
 	}
 
-	// when the AI decides to attack
-	private void AIAttack(int laneNum, Card card){
+	// when the AI decides to play a card in attack position
+	private void AIPlayAttacker(int laneNum, Card card){
 		
-		card.play_card_to_combat_spot(AI_Spots[laneNum]);
+		card.play_card_to_combat_spot(AI_Attack_Spots[laneNum]);
 
 		decisionTimer = card.casting_time;
 	}
-	// when the AI decides to defend
-	private void AIDefend(int laneNum, Card card){
+	// when the AI decides to play a card in defence position
+	private void AIPlayDefender(int laneNum, Card card){
 		
-		card.play_card_to_combat_spot(AI_Spots[laneNum]);
+		card.play_card_to_combat_spot(AI_Defend_Spots[laneNum]);
 
 		decisionTimer = card.casting_time;
+	}
+
+	// when the AI attacks with a card
+	private void AIAttack(Card AICard, Card enemyCard){
+		// todo: the attack
+		if(enemyCard == null){
+			// hit face
+			return;
+		}
+	}
+	// when the AI defends with a card
+	private void AIDefend(Card AICard, Card enemyCard){
+		// todo: the defence
+		
 	}
 
 	enum AIDecision{
@@ -68,7 +84,7 @@ public class AI : Player_Hand {
 	}
 
 	// get info from the lane
-	laneContents checkLane(int laneNum){
+	/*laneContents checkLane(int laneNum){
 		laneContents result = new laneContents();
 		result.state = LaneState.Empty;
 		result.timeUntilCast = 0.0f;
@@ -107,13 +123,124 @@ public class AI : Player_Hand {
 			result.state = LaneState.FriendAttacking;
 		}
 		return result;
-	}
+	}*/
 
 	private AIDecision makeDecision(){
 		if(current_hand.Count == 0){
 			return AIDecision.draw;
 		}
-		List<laneContents> lanes = new List<laneContents>();
+		float[,] confidence = new float[AI_Defend_Spots.Count, player_Attack_Spots.Count];
+		int bestDefenceCard = -1;
+		int bestDefenceTarget = -1;
+		int bestAttackCard = -1;
+		int bestAttackTarget = -1;
+		float bestDefenceConfidence = -10.0f;
+		float bestAttackConfidence = -10.0f;
+		bool canAttack = false;
+		bool canDefend = false;
+		
+		
+		// check AI defence cards versus player's attack cards
+		for(int d = 0; d < AI_Defend_Spots.Count; d++){
+			Card AICard = AI_Defend_Spots[d].currently_holding.GetComponent<Card>();
+			if(!AICard)
+			{
+				for(int a = 0; a < player_Attack_Spots.Count; a++)
+					confidence[d,a] = -10.0f;
+				return AIDecision.defend1 + d;
+			}
+
+			for(int a = 0; a < player_Attack_Spots.Count; a++){
+				Card enemyCard = player_Attack_Spots[a].currently_holding.GetComponent<Card>();
+				if(!enemyCard)
+				{
+					confidence[d,a] = -10.0f;
+					continue;
+				}
+
+				canDefend = true;
+
+				if(enemyCard.attack_power != 0.0f)
+					confidence[d,a]  = 0.1f * Mathf.Floor(AICard.health / enemyCard.attack_power);
+				else
+					confidence[d,a]  = 0.1f * AICard.health;
+
+				if(AICard.defence_power != 0.0f)
+					confidence[d,a] -= 0.1f * Mathf.Floor(enemyCard.health / AICard.defence_power);
+				else
+					confidence[d,a] -= 1.0f;
+
+
+				if(enemyCard.current_state == Card.card_states.Attacking && AICard.defence_time < enemyCard.time_left)
+				{
+					confidence[d,a] += 1.0f;
+				}
+				if(confidence[d,a] > bestDefenceConfidence){
+					bestDefenceCard = d;
+					bestDefenceTarget = a;
+					bestDefenceConfidence = confidence[d,a];
+				}
+			}
+		}
+
+		// check AI attack cards versus player's defence cards
+		for(int a = 0; a < AI_Attack_Spots.Count; a++){
+			Card AICard = AI_Attack_Spots[a].currently_holding.GetComponent<Card>();
+			if(!AICard)
+			{
+				for(int d = 0; d < player_Defend_Spots.Count; d++)
+					confidence[d,a] = -10.0f;
+				return AIDecision.attack1 + a;
+			}
+			for(int d = 0; d < player_Defend_Spots.Count; d++){
+				Card enemyCard = player_Defend_Spots[d].currently_holding.GetComponent<Card>();
+				if(!enemyCard)
+				{
+					confidence[d,a] = -10.0f;
+					continue;
+				}
+
+				canAttack = true;
+
+				if(enemyCard.defence_power != 0.0f)
+					confidence[d,a]  = 0.1f * Mathf.Floor(AICard.health / enemyCard.defence_power);
+				else
+					confidence[d,a]  = 0.1f * AICard.health;
+
+				if(AICard.attack_power != 0.0f)
+					confidence[d,a] -= 0.1f * Mathf.Floor(enemyCard.health / AICard.attack_power);
+				else
+					confidence[d,a] -= 1.0f;
+
+
+				if(enemyCard.current_state == Card.card_states.Attacking && AICard.attack_time < enemyCard.time_left)
+				{
+					confidence[d,a] += 1.0f;
+				}
+				if(confidence[d,a] > bestAttackConfidence){
+					bestAttackCard = d;
+					bestAttackTarget = a;
+					bestAttackConfidence = confidence[d,a];
+				}
+			}
+		}
+
+
+		if(bestAttackConfidence > bestDefenceConfidence && canAttack){
+			if(bestAttackTarget == -1){
+				AIAttack(AI_Attack_Spots[bestAttackCard].currently_holding.GetComponent<Card>(), null);
+			}
+			else
+			{
+				AIAttack(AI_Attack_Spots[bestAttackCard].currently_holding.GetComponent<Card>(), 
+					player_Defend_Spots[bestAttackTarget].currently_holding.GetComponent<Card>());
+			}
+		}else if(canDefend){
+			AIDefend(AI_Defend_Spots[bestDefenceCard].currently_holding.GetComponent<Card>(), 
+				player_Attack_Spots[bestDefenceTarget].currently_holding.GetComponent<Card>());
+		}
+
+		/*List<laneContents> lanes = new List<laneContents>();
 		lanes.Add(checkLane(0));
 		lanes.Add(checkLane(1));
 		lanes.Add(checkLane(2));
@@ -154,7 +281,7 @@ public class AI : Player_Hand {
 		}
 		if(current_hand.Count < 6){
 			return AIDecision.draw;
-		}
+		}*/
 		return AIDecision.none;
 	}
 
@@ -171,38 +298,8 @@ public class AI : Player_Hand {
 		is_person = false;
 	}
 
-	private int FindBestDefence(laneContents lane){
-		float[] confidence = new float[current_hand.Count];
-		int bestCard = 0;
-		float bestConfidence = -10.0f;
-		for(int i = 0; i < current_hand.Count; i++){
-			Card card = current_hand[i].GetComponent<Card>();
 
-
-			if(lane.attackPower != 0.0f)
-				confidence[i]  = 0.1f * Mathf.Floor(card.health / lane.attackPower);
-			else
-				confidence[i]  = 0.1f * card.health;
-
-			if(card.defence_power != 0.0f)
-				confidence[i] -= 0.1f * Mathf.Floor(lane.health / card.defence_power);
-			else
-				confidence[i] -= 1.0f;
-
-
-			if(card.casting_time + card.defence_time < lane.timeUntilCast + lane.timeUntilAttack)
-			{
-				confidence[i] += 0.2f;
-			}
-			if(confidence[i] > bestConfidence){
-				bestCard = i;
-				bestConfidence = confidence[i];
-			}
-		}
-		return bestCard;
-	}
-
-	private int FindBestAttack(laneContents lane){
+	/*private int FindBestAttack(laneContents lane){
 		float[] confidence = new float[current_hand.Count];
 		int bestCard = 0;
 		float bestConfidence = -10.0f;
@@ -249,7 +346,7 @@ public class AI : Player_Hand {
 			}
 		}
 		return bestCard;
-	}
+	}*/
 
 	void FixedUpdate(){
 		// Make a decision every interval, with a bit of random delay so it seems more human
@@ -262,14 +359,14 @@ public class AI : Player_Hand {
 			}
 			else if((int)choice >= (int)AIDecision.defend1)
 			{
-				AIDefend((int)choice - 6, current_hand
-					[FindBestDefence(checkLane((int)choice - 6))]
+				AIPlayDefender((int)choice - 6, current_hand
+					[0]
 					.GetComponent<Card>());
 			}
 			else if((int)choice >= (int)AIDecision.attack1)
 			{
-				AIAttack((int)choice - 1, current_hand
-					[FindBestAttack(checkLane((int)choice - 1))]
+				AIPlayAttacker((int)choice - 1, current_hand
+					[0]
 					.GetComponent<Card>());
 			}
 
