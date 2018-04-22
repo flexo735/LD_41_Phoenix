@@ -157,6 +157,8 @@ public class Card : MonoBehaviour {
 
 	void OnMouseDown() 
 	{
+		if(Time.timeScale == 0.0f)
+			return;
 		if (draggable && (current_state == card_states.Waiting || current_state == card_states.Hand))
 		{
 			offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
@@ -165,6 +167,11 @@ public class Card : MonoBehaviour {
 
 	void OnMouseDrag()
 	{
+		// If the game is paused, don't let the player do silly things
+		if(Time.timeScale == 0.0f)
+			{held_in.arrange_cards();return;}
+
+		// move the card
 		if (draggable && (current_state == card_states.Waiting || current_state == card_states.Hand))
 		{
 			Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
@@ -175,6 +182,10 @@ public class Card : MonoBehaviour {
 
 	void OnMouseUp()
 	{
+		// If the game is paused, don't let the player do silly things
+		if(Time.timeScale == 0.0f)
+			{held_in.arrange_cards();return;}
+			
 		if (current_state == card_states.Hand){
 			//We check to see if we've been dropped on a combat hotspot.
 			bool found_dropspot = false;

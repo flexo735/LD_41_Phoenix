@@ -27,6 +27,8 @@ public class game_manager : MonoBehaviour {
 	public Text winTimeText;
 
 	public void Update(){
+
+		// handle the win/loss screens
 		if(AI.health_value <= 0)
 		{
 			winTimeText.text = winTime.ToString("F2") + " seconds?\nTook you long enough...";
@@ -49,6 +51,7 @@ public class game_manager : MonoBehaviour {
 		}
 	}
 
+	// exit to the main menu
 	public void onReturnToMenu(){
 		Time.timeScale = 1.0f;
 		SceneManager.LoadScene("Main_Menu");
