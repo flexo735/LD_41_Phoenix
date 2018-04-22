@@ -24,6 +24,10 @@ public class Player_Hand : card_spot {
 	public bool locked_out = false;
 	private float lockout_time;
 
+	public Radial_Countdown_Timer mouse_timer;
+
+
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -50,8 +54,7 @@ public class Player_Hand : card_spot {
 	{
 		if (!locked_out)
 		{
-			locked_out = true;
-			lockout_time = the_card.GetComponent<Card>().casting_time;
+			set_lockout(the_card.GetComponent<Card>().casting_time);
 			current_hand.Remove(the_card);
 			arrange_cards();
 			return true;
@@ -92,8 +95,7 @@ public class Player_Hand : card_spot {
 
 			if (lock_out_after)
 			{
-				locked_out = true;
-				lockout_time = 4.0f;
+				set_lockout(4.0f);
 			}
 		}
 	}
@@ -102,5 +104,15 @@ public class Player_Hand : card_spot {
 	{
 		health_value -= amount;
 		health_text.text = "Health: " + health_value.ToString();
+	}
+
+	public void set_lockout(float time)
+	{
+		locked_out = true;
+		lockout_time = time;
+		if (mouse_timer != null)
+		{
+			mouse_timer.start_countdown(time);
+		}
 	}
 }
