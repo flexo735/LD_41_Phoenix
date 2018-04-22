@@ -44,7 +44,7 @@ public class Card : MonoBehaviour {
 	public bool draggable;
 
 	//Card timing variables//
-	private float time_left = 0;
+	public float time_left = 0;
 
 	//Attacking object holder//
 	Player_Hand attack_target = null;
