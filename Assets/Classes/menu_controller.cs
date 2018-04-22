@@ -31,9 +31,10 @@ public class menu_controller : MonoBehaviour {
 			
 			GameObject new_card = Instantiate(basic_card_prefab);
 			Card card_object = new_card.GetComponent<Card>();
+			card_object.draggable = true;
 			card_object.current_state = Card.card_states.Hand;
 			card_object.assign_type(library.master_card_list[Random.Range(0, library.master_card_list.Count)]);
-			new_card.transform.SetPositionAndRotation(new Vector3(menuCamera.aspect * menuCamera.orthographicSize + 1, -1.0f, 0.0f), Quaternion.identity);
+			new_card.transform.SetPositionAndRotation(new Vector3(menuCamera.aspect * menuCamera.orthographicSize + 1.5f, -1.0f, 0.0f), Quaternion.identity);
 			cards.Add(new_card);
 		}
 		for(int i = 0; i < cards.Count; i++){

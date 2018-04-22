@@ -201,7 +201,7 @@ public class Card : MonoBehaviour {
 					break;
 				}
 			}
-			if (!found_dropspot)
+			if (!found_dropspot && held_in != null)
 			{
 				held_in.arrange_cards();
 			}
