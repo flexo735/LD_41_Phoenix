@@ -20,6 +20,7 @@ public class Card : MonoBehaviour {
 
 	public SpriteRenderer card_art;
 	public SpriteRenderer type_art;
+	public SpriteRenderer card_front;
 	public SpriteRenderer card_back;
 
 	public Canvas textCanvas;
@@ -115,6 +116,19 @@ public class Card : MonoBehaviour {
 		else if (current_state == card_states.Waiting)
 		{
 			timer_text.text = "Ready";
+		}
+		if(held_in.GetType() == typeof(AI)){
+			card_art.enabled = false;
+			type_art.enabled = false;
+			card_front.enabled = false;
+			textCanvas.enabled = false;
+			card_back.enabled = true;
+		}else{
+			card_art.enabled = true;
+			type_art.enabled = true;
+			card_front.enabled = true;
+			textCanvas.enabled = true;
+			card_back.enabled = false;
 		}
 	}
 
