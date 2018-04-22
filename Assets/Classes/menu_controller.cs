@@ -13,6 +13,10 @@ public class menu_controller : MonoBehaviour {
 	public void onPlayClick(){
 		SceneManager.LoadScene("Main_Board");
 	}
+	public void onQuitClick(){
+		Application.Quit();
+		UnityEditor.EditorApplication.isPlaying = false;
+	}
 
 	public void Start(){
 		cards = new List<GameObject>();
