@@ -20,6 +20,7 @@ public class Card : MonoBehaviour {
 
 	public SpriteRenderer card_art;
 	public SpriteRenderer type_art;
+	public SpriteRenderer card_back;
 
 	public Canvas textCanvas;
 
@@ -92,6 +93,7 @@ public class Card : MonoBehaviour {
 		{
 			//We want to update the thing.
 			timer_bar.fillAmount = time_left/max_time_left;
+			start_timer_bar_colour = (current_state == card_states.Attacking)? Color.red : Color.blue;
 			Color lerped_colour = Color.Lerp(end_timer_bar_colour,start_timer_bar_colour,time_left/max_time_left);
 			timer_bar.color = lerped_colour;
 		}
