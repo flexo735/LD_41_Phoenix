@@ -154,7 +154,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 2}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!1001 &61515956
 Prefab:
@@ -256,7 +256,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 2}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!1 &107507763
 GameObject:
@@ -341,7 +341,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   master_card_list:
   - name: Apprentice of the Magic Stick
-    flavour_text: '"Beware the Stick!"'
+    flavour_text: '"Beware the Stick! Praise the Stick! Respect the Stick! And above
+      all, stick the Stick... Somewhere safe."'
     attack_power: 3
     defence_power: 2
     health: 2
@@ -350,9 +351,10 @@ MonoBehaviour:
     casting_time: 2
     card_art: {fileID: 21300000, guid: 49a395f8367e90d43a9ec0e687579e07, type: 3}
     type: 3
-    type_art: {fileID: 21300000, guid: 9992740a5e2654a42a43fd777959c0db, type: 3}
+    type_art: {fileID: 21300000, guid: bc06d7de9b60945439d97ddc42ca6d7c, type: 3}
   - name: Manspider
-    flavour_text: '"Bitten by a radioactive man!"'
+    flavour_text: '"Bitten by a radioactive man, he now has the super powers of a
+      human: crippling depression and anxiety!"'
     attack_power: 1
     defence_power: 3
     health: 3
@@ -361,7 +363,7 @@ MonoBehaviour:
     casting_time: 3
     card_art: {fileID: 21300000, guid: 92803092250d1dc4c802dd225ee78976, type: 3}
     type: 4
-    type_art: {fileID: 21300000, guid: 22d89a9821d99284a95347920c253a1d, type: 3}
+    type_art: {fileID: 21300000, guid: 67df74d3f86502f47a42074ce70af8cb, type: 3}
   - name: Dragon
     flavour_text: '"Why? Because you''re a dragon!"'
     attack_power: 6
@@ -372,7 +374,7 @@ MonoBehaviour:
     casting_time: 4
     card_art: {fileID: 21300000, guid: ce95eaac3ff659144843861bc7f766b6, type: 3}
     type: 2
-    type_art: {fileID: 21300000, guid: a3f4a6fe40fbc434186008cc3f4c68d8, type: 3}
+    type_art: {fileID: 21300000, guid: 6128a1e5ba5d568419dd00ced468e673, type: 3}
   - name: Bearnostorm
     flavour_text: '"The ice caps are melting, but he''s still cool"'
     attack_power: 5
@@ -383,7 +385,7 @@ MonoBehaviour:
     casting_time: 4
     card_art: {fileID: 21300000, guid: 9eec266ba65faa54a9e7fca2498955eb, type: 3}
     type: 0
-    type_art: {fileID: 21300000, guid: d0f6cfe093ec8944c9205c7bf27a4915, type: 3}
+    type_art: {fileID: 21300000, guid: ce1b3d23bc9bccd4b9dc076481f963db, type: 3}
   - name: Bearstorm
     flavour_text: '"He just looks like a few dots to me"'
     attack_power: 3
@@ -394,7 +396,7 @@ MonoBehaviour:
     casting_time: 4
     card_art: {fileID: 21300000, guid: 852e0c578e5fb87498b49221289bdd48, type: 3}
     type: 0
-    type_art: {fileID: 21300000, guid: d0f6cfe093ec8944c9205c7bf27a4915, type: 3}
+    type_art: {fileID: 21300000, guid: ce1b3d23bc9bccd4b9dc076481f963db, type: 3}
   - name: Cookie of Courage
     flavour_text: '"You need a lot of courage to eat a lot of cookies"'
     attack_power: 1
@@ -405,7 +407,7 @@ MonoBehaviour:
     casting_time: 6
     card_art: {fileID: 21300000, guid: d858900995509394e9200d23b1a769fa, type: 3}
     type: 3
-    type_art: {fileID: 21300000, guid: 9992740a5e2654a42a43fd777959c0db, type: 3}
+    type_art: {fileID: 21300000, guid: bc06d7de9b60945439d97ddc42ca6d7c, type: 3}
   - name: Dead Gazebo
     flavour_text: '"Will you awaken the gazebo?"'
     attack_power: 2
@@ -416,7 +418,7 @@ MonoBehaviour:
     casting_time: 10
     card_art: {fileID: 21300000, guid: 6485c1e98672dc24dac694933aff80b5, type: 3}
     type: 4
-    type_art: {fileID: 21300000, guid: 22d89a9821d99284a95347920c253a1d, type: 3}
+    type_art: {fileID: 21300000, guid: 67df74d3f86502f47a42074ce70af8cb, type: 3}
   - name: Goldfish
     flavour_text: '"Blub blub"'
     attack_power: 5
@@ -427,7 +429,7 @@ MonoBehaviour:
     casting_time: 4
     card_art: {fileID: 21300000, guid: 4adae47cbf581954ba93f6d71ee7316a, type: 3}
     type: 5
-    type_art: {fileID: 21300000, guid: b927cd2d5d2ca5049b8e758126b45278, type: 3}
+    type_art: {fileID: 21300000, guid: 84fe42fec1c9f0942b718e0a966715ec, type: 3}
   - name: Magman
     flavour_text: '"Fire me? You can''t fi-aaaaaugha!"'
     attack_power: 6
@@ -438,9 +440,9 @@ MonoBehaviour:
     casting_time: 4
     card_art: {fileID: 21300000, guid: 83f32fdf1f14fae498001153b54b6569, type: 3}
     type: 2
-    type_art: {fileID: 21300000, guid: a3f4a6fe40fbc434186008cc3f4c68d8, type: 3}
+    type_art: {fileID: 21300000, guid: 6128a1e5ba5d568419dd00ced468e673, type: 3}
   - name: Mosquito
-    flavour_text: '"Bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"'
+    flavour_text: '"Bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"'
     attack_power: 1
     defence_power: 0
     health: 1
@@ -449,7 +451,7 @@ MonoBehaviour:
     casting_time: 1
     card_art: {fileID: 21300000, guid: ae59aa8e79c68d24b924607817f671f5, type: 3}
     type: 6
-    type_art: {fileID: 21300000, guid: 2f325fe7c0bf1d8428cd30c75b3bc273, type: 3}
+    type_art: {fileID: 21300000, guid: 180c4e119fde23a41af095f82f0c4f75, type: 3}
   - name: Whirlywind
     flavour_text: '"Right round, baby!"'
     attack_power: 5
@@ -460,7 +462,7 @@ MonoBehaviour:
     casting_time: 8
     card_art: {fileID: 21300000, guid: 873b7bd76a5f9bd42bac5ccdf73a2beb, type: 3}
     type: 6
-    type_art: {fileID: 21300000, guid: 2f325fe7c0bf1d8428cd30c75b3bc273, type: 3}
+    type_art: {fileID: 21300000, guid: 180c4e119fde23a41af095f82f0c4f75, type: 3}
   - name: Generic Vine Monster
     flavour_text: '"It''s a mess."'
     attack_power: 2
@@ -471,7 +473,7 @@ MonoBehaviour:
     casting_time: 4
     card_art: {fileID: 21300000, guid: 3a33076fcef1db946a3e6520698b7488, type: 3}
     type: 4
-    type_art: {fileID: 21300000, guid: 22d89a9821d99284a95347920c253a1d, type: 3}
+    type_art: {fileID: 21300000, guid: 67df74d3f86502f47a42074ce70af8cb, type: 3}
   - name: William Eagleson
     flavour_text: '"Zap! Zap! ZAAAAAAP!!!"'
     attack_power: 6
@@ -482,7 +484,7 @@ MonoBehaviour:
     casting_time: 5
     card_art: {fileID: 21300000, guid: b2a8663e462ebff4783375e9d54264d2, type: 3}
     type: 1
-    type_art: {fileID: 21300000, guid: 95010cb23f1778a4f83106f9434dd8ae, type: 3}
+    type_art: {fileID: 21300000, guid: d4845a30223a7cb488a384c5ae926ba1, type: 3}
   - name: Slender Lightning Man
     flavour_text: '"He''s a bit thin."'
     attack_power: 3
@@ -493,9 +495,10 @@ MonoBehaviour:
     casting_time: 4
     card_art: {fileID: 21300000, guid: f02e7e8a447c7d7458e092d3402dc19a, type: 3}
     type: 1
-    type_art: {fileID: 21300000, guid: 95010cb23f1778a4f83106f9434dd8ae, type: 3}
+    type_art: {fileID: 21300000, guid: d4845a30223a7cb488a384c5ae926ba1, type: 3}
   - name: A Log Gator
-    flavour_text: '"I''m 110% sure that''s just a log. Plus or minus a few."'
+    flavour_text: '"I''m a hundred and ten percent sure that''s just a log. Plus or
+      minus a few percent."'
     attack_power: 6
     defence_power: 5
     health: 8
@@ -503,8 +506,8 @@ MonoBehaviour:
     defence_time: 4
     casting_time: 4
     card_art: {fileID: 21300000, guid: 524bb22e77fd9cd4e81bd0135d5047ea, type: 3}
-    type: 2
-    type_art: {fileID: 21300000, guid: a3f4a6fe40fbc434186008cc3f4c68d8, type: 3}
+    type: 5
+    type_art: {fileID: 21300000, guid: 84fe42fec1c9f0942b718e0a966715ec, type: 3}
 --- !u!1 &112774871
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,7 +725,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 2}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!1001 &188401219
 Prefab:
@@ -883,7 +886,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 2}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!1 &469504280
 GameObject:
@@ -1552,7 +1555,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   master_card_list:
   - name: Apprentice of the Magic Stick
-    flavour_text: '"Beware the Stick!"'
+    flavour_text: '"Beware the Stick! Praise the Stick! Respect the Stick! And above
+      all, stick the Stick... Somewhere safe."'
     attack_power: 3
     defence_power: 2
     health: 2
@@ -1561,9 +1565,10 @@ MonoBehaviour:
     casting_time: 2
     card_art: {fileID: 21300000, guid: 49a395f8367e90d43a9ec0e687579e07, type: 3}
     type: 3
-    type_art: {fileID: 21300000, guid: 9992740a5e2654a42a43fd777959c0db, type: 3}
+    type_art: {fileID: 21300000, guid: bc06d7de9b60945439d97ddc42ca6d7c, type: 3}
   - name: Manspider
-    flavour_text: '"Bitten by a radioactive man!"'
+    flavour_text: '"Bitten by a radioactive man, he now has the super powers of a
+      human: crippling depression and anxiety!"'
     attack_power: 1
     defence_power: 3
     health: 3
@@ -1572,7 +1577,7 @@ MonoBehaviour:
     casting_time: 3
     card_art: {fileID: 21300000, guid: 92803092250d1dc4c802dd225ee78976, type: 3}
     type: 4
-    type_art: {fileID: 21300000, guid: 22d89a9821d99284a95347920c253a1d, type: 3}
+    type_art: {fileID: 21300000, guid: 67df74d3f86502f47a42074ce70af8cb, type: 3}
   - name: Dragon
     flavour_text: '"Why? Because you''re a dragon!"'
     attack_power: 6
@@ -1583,7 +1588,7 @@ MonoBehaviour:
     casting_time: 4
     card_art: {fileID: 21300000, guid: ce95eaac3ff659144843861bc7f766b6, type: 3}
     type: 2
-    type_art: {fileID: 21300000, guid: a3f4a6fe40fbc434186008cc3f4c68d8, type: 3}
+    type_art: {fileID: 21300000, guid: 6128a1e5ba5d568419dd00ced468e673, type: 3}
   - name: Bearnostorm
     flavour_text: '"The ice caps are melting, but he''s still cool"'
     attack_power: 5
@@ -1594,7 +1599,7 @@ MonoBehaviour:
     casting_time: 4
     card_art: {fileID: 21300000, guid: 9eec266ba65faa54a9e7fca2498955eb, type: 3}
     type: 0
-    type_art: {fileID: 21300000, guid: d0f6cfe093ec8944c9205c7bf27a4915, type: 3}
+    type_art: {fileID: 21300000, guid: ce1b3d23bc9bccd4b9dc076481f963db, type: 3}
   - name: Bearstorm
     flavour_text: '"He just looks like a few dots to me"'
     attack_power: 3
@@ -1605,7 +1610,7 @@ MonoBehaviour:
     casting_time: 4
     card_art: {fileID: 21300000, guid: 852e0c578e5fb87498b49221289bdd48, type: 3}
     type: 0
-    type_art: {fileID: 21300000, guid: d0f6cfe093ec8944c9205c7bf27a4915, type: 3}
+    type_art: {fileID: 21300000, guid: ce1b3d23bc9bccd4b9dc076481f963db, type: 3}
   - name: Cookie of Courage
     flavour_text: '"You need a lot of courage to eat a lot of cookies"'
     attack_power: 1
@@ -1616,7 +1621,7 @@ MonoBehaviour:
     casting_time: 6
     card_art: {fileID: 21300000, guid: d858900995509394e9200d23b1a769fa, type: 3}
     type: 3
-    type_art: {fileID: 21300000, guid: 9992740a5e2654a42a43fd777959c0db, type: 3}
+    type_art: {fileID: 21300000, guid: bc06d7de9b60945439d97ddc42ca6d7c, type: 3}
   - name: Dead Gazebo
     flavour_text: '"Will you awaken the gazebo?"'
     attack_power: 2
@@ -1627,7 +1632,7 @@ MonoBehaviour:
     casting_time: 10
     card_art: {fileID: 21300000, guid: 6485c1e98672dc24dac694933aff80b5, type: 3}
     type: 4
-    type_art: {fileID: 21300000, guid: 22d89a9821d99284a95347920c253a1d, type: 3}
+    type_art: {fileID: 21300000, guid: 67df74d3f86502f47a42074ce70af8cb, type: 3}
   - name: Goldfish
     flavour_text: '"Blub blub"'
     attack_power: 5
@@ -1638,7 +1643,7 @@ MonoBehaviour:
     casting_time: 4
     card_art: {fileID: 21300000, guid: 4adae47cbf581954ba93f6d71ee7316a, type: 3}
     type: 5
-    type_art: {fileID: 21300000, guid: b927cd2d5d2ca5049b8e758126b45278, type: 3}
+    type_art: {fileID: 21300000, guid: 84fe42fec1c9f0942b718e0a966715ec, type: 3}
   - name: Magman
     flavour_text: '"Fire me? You can''t fi-aaaaaugha!"'
     attack_power: 6
@@ -1649,9 +1654,9 @@ MonoBehaviour:
     casting_time: 4
     card_art: {fileID: 21300000, guid: 83f32fdf1f14fae498001153b54b6569, type: 3}
     type: 2
-    type_art: {fileID: 21300000, guid: a3f4a6fe40fbc434186008cc3f4c68d8, type: 3}
+    type_art: {fileID: 21300000, guid: 6128a1e5ba5d568419dd00ced468e673, type: 3}
   - name: Mosquito
-    flavour_text: '"Bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"'
+    flavour_text: '"Bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"'
     attack_power: 1
     defence_power: 0
     health: 1
@@ -1660,7 +1665,7 @@ MonoBehaviour:
     casting_time: 1
     card_art: {fileID: 21300000, guid: ae59aa8e79c68d24b924607817f671f5, type: 3}
     type: 6
-    type_art: {fileID: 21300000, guid: 2f325fe7c0bf1d8428cd30c75b3bc273, type: 3}
+    type_art: {fileID: 21300000, guid: 180c4e119fde23a41af095f82f0c4f75, type: 3}
   - name: Whirlywind
     flavour_text: '"Right round, baby!"'
     attack_power: 5
@@ -1671,7 +1676,7 @@ MonoBehaviour:
     casting_time: 8
     card_art: {fileID: 21300000, guid: 873b7bd76a5f9bd42bac5ccdf73a2beb, type: 3}
     type: 6
-    type_art: {fileID: 21300000, guid: 2f325fe7c0bf1d8428cd30c75b3bc273, type: 3}
+    type_art: {fileID: 21300000, guid: 180c4e119fde23a41af095f82f0c4f75, type: 3}
   - name: Generic Vine Monster
     flavour_text: '"It''s a mess."'
     attack_power: 2
@@ -1682,7 +1687,7 @@ MonoBehaviour:
     casting_time: 4
     card_art: {fileID: 21300000, guid: 3a33076fcef1db946a3e6520698b7488, type: 3}
     type: 4
-    type_art: {fileID: 21300000, guid: 22d89a9821d99284a95347920c253a1d, type: 3}
+    type_art: {fileID: 21300000, guid: 67df74d3f86502f47a42074ce70af8cb, type: 3}
   - name: William Eagleson
     flavour_text: '"Zap! Zap! ZAAAAAAP!!!"'
     attack_power: 6
@@ -1693,7 +1698,7 @@ MonoBehaviour:
     casting_time: 5
     card_art: {fileID: 21300000, guid: b2a8663e462ebff4783375e9d54264d2, type: 3}
     type: 1
-    type_art: {fileID: 21300000, guid: 95010cb23f1778a4f83106f9434dd8ae, type: 3}
+    type_art: {fileID: 21300000, guid: d4845a30223a7cb488a384c5ae926ba1, type: 3}
   - name: Slender Lightning Man
     flavour_text: '"He''s a bit thin."'
     attack_power: 3
@@ -1704,9 +1709,10 @@ MonoBehaviour:
     casting_time: 4
     card_art: {fileID: 21300000, guid: f02e7e8a447c7d7458e092d3402dc19a, type: 3}
     type: 1
-    type_art: {fileID: 21300000, guid: 95010cb23f1778a4f83106f9434dd8ae, type: 3}
+    type_art: {fileID: 21300000, guid: d4845a30223a7cb488a384c5ae926ba1, type: 3}
   - name: A Log Gator
-    flavour_text: '"I''m 110% sure that''s just a log. Plus or minus a few."'
+    flavour_text: '"I''m a hundred and ten percent sure that''s just a log. Plus or
+      minus a few percent."'
     attack_power: 6
     defence_power: 5
     health: 8
@@ -1714,8 +1720,8 @@ MonoBehaviour:
     defence_time: 4
     casting_time: 4
     card_art: {fileID: 21300000, guid: 524bb22e77fd9cd4e81bd0135d5047ea, type: 3}
-    type: 2
-    type_art: {fileID: 21300000, guid: a3f4a6fe40fbc434186008cc3f4c68d8, type: 3}
+    type: 5
+    type_art: {fileID: 21300000, guid: 84fe42fec1c9f0942b718e0a966715ec, type: 3}
 --- !u!1 &974956845 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1044841829492812, guid: 12fef97f4bf8947408ac6a270002fac5,
@@ -1757,7 +1763,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 2}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!1001 &1082176129
 Prefab:
@@ -2060,8 +2066,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1125656198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 16, y: 9, z: 1}
+  m_LocalPosition: {x: 0, y: -0.022, z: 1}
+  m_LocalScale: {x: 16, y: 9.04326, z: 1}
   m_Children:
   - {fileID: 1631779514}
   - {fileID: 1249542397}
@@ -2328,7 +2334,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 2}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!1 &1249542396
 GameObject:
@@ -2463,7 +2469,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 2}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!1001 &1379515753
 Prefab:
@@ -2565,7 +2571,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 2}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!1 &1385613282
 GameObject:
@@ -2876,7 +2882,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 2}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!1 &2052226459
 GameObject:
@@ -3013,5 +3019,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 2}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0

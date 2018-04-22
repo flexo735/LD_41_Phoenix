@@ -97,6 +97,7 @@ public class AI : Player_Hand {
 		int bestDefenceTarget = -1;
 		int bestAttackCard = -1;
 		int bestAttackTarget = -1;
+		int bestAttackPower = -1;
 		float bestDefenceConfidence = -10.0f;
 		float bestAttackConfidence = -10.0f;
 		bool canAttack = false;
@@ -170,6 +171,10 @@ public class AI : Player_Hand {
 				continue;
 			}
 			canAttack = true;
+			if(bestAttackConfidence < -5.0f && AICard.attack_power > bestAttackPower){
+				bestAttackCard = a;
+				bestAttackPower = AICard.attack_power;
+			}
 			for(int d = 0; d < player_Attack_Spots.Count; d++){
 				if(!player_Attack_Spots[d].currently_holding)
 				{
