@@ -183,10 +183,16 @@ public class Card : MonoBehaviour {
 					start_attack(hit.transform.parent.gameObject.GetComponent<Player_Hand>());
 					break;
 				}
+
+				else if (hit.gameObject.GetComponent<Card>() != null && hit.gameObject.GetComponent<Card>().controlling_player != this.controlling_player && hit.gameObject.GetComponent<Card>().current_state == card_states.Attacking)
+				{
+					//TODO: if we've been played on an attacking card we defend against it.
+					defend_against_attack(hit.gameObject.GetComponent<Card>());
+					break;
+				}
 			}
 
 			held_in.arrange_cards(); // Always arrange yourself so you snap back to your attack point and begin attacking.
-			//TODO: Check to see if we're being assigned to another creature or face. If so, start attacking, defending, ect.
 		}
 		else{
 			held_in.arrange_cards();
@@ -218,5 +224,42 @@ public class Card : MonoBehaviour {
 	void finish_attack(Player_Hand the_target)
 	{
 		the_target.take_damage(attack_power);
+	}
+
+	void defend_against_attack(Card enemy_card)
+	{
+		Debug.Assert(enemy_card.current_state == card_states.Attacking);
+		Debug.Assert(current_state == card_states.Waiting);
+		enemy_card.health -= this.defence_power;
+		this.health -= enemy_card.attack_power;
+
+		enemy_card.health_text.text = "" + enemy_card.health;
+		this.health_text.text = "" + this.health;
+	
+		if (enemy_card.health <= 0)
+		{
+			enemy_card.card_destroyed();
+		}
+
+		if (this.health <= 0)
+		{
+			this.card_destroyed();
+		}
+		else
+		{
+			time_left = defence_time;
+			current_state = card_states.Cooldown;
+		}
+	}
+
+
+	void card_destroyed()
+	{
+		if (held_in is combat_spot)
+		{
+			held_in.GetComponent<combat_spot>().currently_holding = null;
+		}
+		GameObject.Destroy(this);
+		//TODO: Remove the card, make sure to empty the combat hotspot
 	}
 }
