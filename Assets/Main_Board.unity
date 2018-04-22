@@ -1393,6 +1393,8 @@ MonoBehaviour:
   show_countdown: 0
   current_time: 0
   max_time: 0
+  start_colour: {r: 0.9558824, g: 0, b: 0, a: 1}
+  end_colour: {r: 0.09655173, g: 0.8235294, b: 0, a: 1}
 --- !u!114 &838066755
 MonoBehaviour:
   m_ObjectHideFlags: 0

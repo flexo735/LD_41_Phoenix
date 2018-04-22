@@ -11,12 +11,15 @@ public class Radial_Countdown_Timer : MonoBehaviour {
 
 	private Image radial_image;
 
+	public Color start_colour;
+	public Color end_colour;
+
 	// Use this for initialization
 	void Start () 
 	{
+		radial_image = gameObject.GetComponent<Image>();
 		radial_image.enabled = false;
 		current_time = 0.0f;
-		radial_image = gameObject.GetComponent<Image>();
 		radial_image.fillMethod = Image.FillMethod.Radial360;
 		radial_image.fillClockwise = true;
 		radial_image.fillOrigin = 2;
@@ -35,6 +38,8 @@ public class Radial_Countdown_Timer : MonoBehaviour {
 			else
 			{
 				radial_image.fillAmount = current_time/max_time;
+				Color lerped_colour = Color.Lerp(end_colour,start_colour,current_time/max_time);
+				radial_image.color = lerped_colour;
 			}
 		}
 
