@@ -33,6 +33,10 @@ public class Card : MonoBehaviour {
 	public Text flavour_text_text;
 	public Text timer_text;
 
+	public Image timer_bar;
+	public Color start_timer_bar_colour;
+	public Color end_timer_bar_colour;
+
 	public enum card_states {Hand,Waiting,Attacking,Cooldown};
 	[SerializeField]
 	public card_states current_state;
@@ -45,6 +49,7 @@ public class Card : MonoBehaviour {
 
 	//Card timing variables//
 	public float time_left = 0;
+	private float max_time_left; //Used to scale the timer bar relative to the size of the initial cooldown.
 
 	//Attacking object holder//
 	Player_Hand attack_target = null;
@@ -65,11 +70,7 @@ public class Card : MonoBehaviour {
 			if (time_left <= 0)
 			{
 				current_state = card_states.Waiting;
-				timer_text.text = "";
-			}
-			else
-			{
-				timer_text.text = time_left.ToString("#.0") + " Seconds";
+				timer_bar.enabled = false;
 			}
 		}
 
@@ -79,13 +80,36 @@ public class Card : MonoBehaviour {
 			if (time_left <= 0)
 			{
 				current_state = card_states.Waiting;
+				timer_bar.enabled = false;
 				finish_attack(attack_target);
-				timer_text.text = "";
 			}
-			else
-			{
-				timer_text.text = time_left.ToString("#.0") + " Seconds";
-			}
+		}
+
+		if (current_state == card_states.Attacking || current_state == card_states.Cooldown)
+		{
+			//We want to update the thing.
+			timer_bar.fillAmount = time_left/max_time_left;
+			Color lerped_colour = Color.Lerp(end_timer_bar_colour,start_timer_bar_colour,time_left/max_time_left);
+			timer_bar.color = lerped_colour;
+		}
+
+
+	}
+
+	void FixedUpdate()
+	{
+		//We maintain the card state notice at the top, done in an update to play nice with other classes modifying it
+		if (current_state == card_states.Cooldown)
+		{
+			timer_text.text = "Cooldown";
+		}
+		else if (current_state == card_states.Attacking)
+		{
+			timer_text.text = "Attacking!";
+		}
+		else if (current_state == card_states.Waiting)
+		{
+			timer_text.text = "Ready";
 		}
 	}
 
@@ -170,7 +194,6 @@ public class Card : MonoBehaviour {
 			{
 				held_in.arrange_cards();
 			}
-			//TODO: Check to see if we're in the play area of the map. In that case play the card, remove it from your hand and and assign it to a different holder to arrange.
 		}
 
 		else if (current_state == card_states.Waiting){
@@ -207,7 +230,10 @@ public class Card : MonoBehaviour {
 			the_spot.currently_holding = this.gameObject;
 			current_state = card_states.Cooldown;
 			time_left = casting_time;
+			max_time_left = casting_time;
 			held_in.arrange_cards();
+
+			timer_bar.enabled = true;
 		}
 	}
 
@@ -217,7 +243,10 @@ public class Card : MonoBehaviour {
 		{
 			current_state = card_states.Attacking;
 			time_left = attack_time;
+			max_time_left = attack_time;
 			attack_target = the_target;
+
+			timer_bar.enabled = true;
 		}
 	}
 
@@ -240,6 +269,10 @@ public class Card : MonoBehaviour {
 		{
 			enemy_card.card_destroyed();
 		}
+		else
+		{
+			enemy_card.current_state = card_states.Cooldown; //If they aren't killed the attack is aborted and they are put into cooldown for the remaining attack time.
+		}
 
 		if (this.health <= 0)
 		{
@@ -248,7 +281,10 @@ public class Card : MonoBehaviour {
 		else
 		{
 			time_left = defence_time;
+			max_time_left = defence_time;
 			current_state = card_states.Cooldown;
+
+			timer_bar.enabled = true;
 		}
 	}
 
@@ -260,6 +296,5 @@ public class Card : MonoBehaviour {
 			held_in.GetComponent<combat_spot>().currently_holding = null;
 		}
 		GameObject.Destroy(this);
-		//TODO: Remove the card, make sure to empty the combat hotspot.
 	}
 }
