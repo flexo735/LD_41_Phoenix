@@ -211,7 +211,7 @@ public class Card : MonoBehaviour {
 		}
 	}
 
-	void start_attack(Player_Hand the_target)
+	public void start_attack(Player_Hand the_target)
 	{
 		if (!controlling_player.locked_out)
 		{
@@ -226,7 +226,7 @@ public class Card : MonoBehaviour {
 		the_target.take_damage(attack_power);
 	}
 
-	void defend_against_attack(Card enemy_card)
+	public void defend_against_attack(Card enemy_card)
 	{
 		Debug.Assert(enemy_card.current_state == card_states.Attacking);
 		Debug.Assert(current_state == card_states.Waiting);
@@ -259,7 +259,7 @@ public class Card : MonoBehaviour {
 		{
 			held_in.GetComponent<combat_spot>().currently_holding = null;
 		}
-		GameObject.Destroy(this);
+		GameObject.Destroy(gameObject);
 		//TODO: Remove the card, make sure to empty the combat hotspot.
 	}
 }

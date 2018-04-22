@@ -301,18 +301,19 @@ MonoBehaviour:
   decisionDelay: 1
   decisionUncertainty: 1
   decisionTimer: 0
-  player_Spots:
+  player_Attack_Spots:
   - {fileID: 171769961}
   - {fileID: 2058833192}
   - {fileID: 61515959}
   - {fileID: 974956846}
   - {fileID: 25296248}
-  AI_Spots:
+  AI_Attack_Spots:
   - {fileID: 236237037}
   - {fileID: 1999726817}
   - {fileID: 1379515756}
   - {fileID: 1287294001}
   - {fileID: 1205620266}
+  player_Hand: {fileID: 888561213}
 --- !u!4 &107507766
 Transform:
   m_ObjectHideFlags: 0
