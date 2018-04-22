@@ -16,7 +16,6 @@ public class Radial_Countdown_Timer : MonoBehaviour {
 	{
 		radial_image = gameObject.GetComponent<Image>();
 		radial_image.fillMethod = Image.FillMethod.Radial360;
-		radial_image.enabled = false;
 	}
 	
 	// Update is called once per frame
