@@ -2939,9 +2939,10 @@ MonoBehaviour:
   winScreen: {fileID: 1453023454}
   loseScreen: {fileID: 1549092214}
   player: {fileID: 888561213}
-  AI: {fileID: 107507764}
+  ai: {fileID: 107507764}
   winTime: 0
   winTimeText: {fileID: 1243359052}
+  gameCamera: {fileID: 0}
 --- !u!4 &1348126044
 Transform:
   m_ObjectHideFlags: 0

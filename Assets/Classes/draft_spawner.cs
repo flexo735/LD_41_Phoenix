@@ -16,6 +16,7 @@ public class draft_spawner : MonoBehaviour {
 	private bool drafting = true;
 
 	private List<GameObject> spawned_cards = new List<GameObject>();
+	private List<CardTumbleData> tumble_data = new List<CardTumbleData>();
 
 	public float draft_time = 10;
 	public float after_draft_time = 5;
@@ -69,15 +70,25 @@ public class draft_spawner : MonoBehaviour {
 			card_data.current_state = Card.card_states.Draft;
 			card_data.assign_type(spawnable_cards.master_card_list[Random.Range(0, spawnable_cards.master_card_list.Count)]);
 
+			CardTumbleData td = new CardTumbleData();
+			td.rotationOffset = Random.Range(0,360);
+			td.speed = -0.1f / Random.Range(1.5f, 3.5f);
+
 			spawned_cards.Add(new_card);
+			tumble_data.Add(td);
 
 			float random_y = Random.Range(-2.0f,4.0f);
-			new_card.transform.SetPositionAndRotation(new Vector3(draft_cam.aspect * draft_cam.orthographicSize + 1.5f, random_y, 0.0f), Quaternion.identity);
+			new_card.transform.SetPositionAndRotation(new Vector3(draft_cam.aspect * draft_cam.orthographicSize + 2.0f, random_y, 0.0f), Quaternion.identity);
 
 		}
 
-		for(int i = 0; i < spawned_cards.Count; i++){
-			spawned_cards[i].transform.SetPositionAndRotation(spawned_cards[i].transform.position + new Vector3(-0.03f, 0.0f, 0.0f), Quaternion.AngleAxis(i * 60 - Time.time * 30, Vector3.back));
+		for(int i = 0; i < spawned_cards.Count && i < tumble_data.Count; i++){
+			spawned_cards[i].transform.SetPositionAndRotation(spawned_cards[i].transform.position + new Vector3(tumble_data[i].speed, 0.0f, 0.0f), Quaternion.AngleAxis(tumble_data[i].rotationOffset - Time.time * 30, Vector3.back));
 		}
+	}
+
+	public struct CardTumbleData{
+		public float rotationOffset;
+		public float speed;
 	}
 }

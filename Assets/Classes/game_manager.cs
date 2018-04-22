@@ -8,6 +8,7 @@ public class game_manager : MonoBehaviour {
 
 	// singleton stuff
 	private static game_manager instance;
+
 	public static game_manager getInstance(){
 		if(instance == null)
 		{
@@ -22,32 +23,46 @@ public class game_manager : MonoBehaviour {
 	public Canvas winScreen;
 	public Canvas loseScreen;
 	public Player_Hand player;
-	public Player_Hand AI;
+	public Player_Hand ai;
 	public float winTime;
 	public Text winTimeText;
+	public Camera gameCamera;
+
+	void Awake(){
+		if(instance)
+			if(instance != this){
+				GameObject.DestroyImmediate(instance.gameObject);
+				instance = this;
+			}
+		else
+			instance = this;
+	}
 
 	public void Update(){
 
 		// handle the win/loss screens
-		if(AI.health_value <= 0)
+		if(SceneManager.GetActiveScene().name == "Main_Board")
 		{
-			winTimeText.text = winTime.ToString("F2") + " seconds?\nTook you long enough...";
-			winScreen.gameObject.SetActive(true);
-			loseScreen.gameObject.SetActive(false);
-			Time.timeScale = 0.0f;
-		}
-		else if(player.health_value <= 0)
-		{
-			winScreen.gameObject.SetActive(false);
-			loseScreen.gameObject.SetActive(true);
-			Time.timeScale = 0.0f;
-		}
-		else
-		{
-			winTime = Time.timeSinceLevelLoad;
-			Time.timeScale = 1.0f;
-			winScreen.gameObject.SetActive(false);
-			loseScreen.gameObject.SetActive(false);
+			if(ai.health_value <= 0)
+			{
+				winTimeText.text = winTime.ToString("F2") + " seconds?\nTook you long enough...";
+				winScreen.gameObject.SetActive(true);
+				loseScreen.gameObject.SetActive(false);
+				Time.timeScale = 0.0f;
+			}
+			else if(player.health_value <= 0)
+			{
+				winScreen.gameObject.SetActive(false);
+				loseScreen.gameObject.SetActive(true);
+				Time.timeScale = 0.0f;
+			}
+			else
+			{
+				winTime = Time.timeSinceLevelLoad;
+				Time.timeScale = 1.0f;
+				winScreen.gameObject.SetActive(false);
+				loseScreen.gameObject.SetActive(false);
+			}
 		}
 	}
 
