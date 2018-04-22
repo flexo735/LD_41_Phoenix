@@ -260,6 +260,6 @@ public class Card : MonoBehaviour {
 			held_in.GetComponent<combat_spot>().currently_holding = null;
 		}
 		GameObject.Destroy(this);
-		//TODO: Remove the card, make sure to empty the combat hotspot
+		//TODO: Remove the card, make sure to empty the combat hotspot.
 	}
 }
