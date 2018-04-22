@@ -37,7 +37,7 @@ public class Card : MonoBehaviour {
 	public Color start_timer_bar_colour;
 	public Color end_timer_bar_colour;
 
-	public enum card_states {Hand,Waiting,Attacking,Cooldown};
+	public enum card_states {Hand,Waiting,Attacking,Cooldown,Draft};
 	[SerializeField]
 	public card_states current_state;
 
@@ -54,6 +54,9 @@ public class Card : MonoBehaviour {
 	//Attacking object holder//
 	Player_Hand attack_target = null;
 	public Player_Hand controlling_player;
+
+	//Used for drafts//
+	public raw_card_stats original_stats;
 
 	// Use this for initialization
 	void Start () 
@@ -115,6 +118,8 @@ public class Card : MonoBehaviour {
 
 	public void assign_type(raw_card_stats this_card_type)
 	{
+		this.original_stats = this_card_type;
+
 		this.attack_power = this_card_type.attack_power;
 		this.defence_power = this_card_type.defence_power;
 		this.health = this_card_type.health;
@@ -159,7 +164,7 @@ public class Card : MonoBehaviour {
 	{
 		if(Time.timeScale == 0.0f)
 			return;
-		if (draggable && (current_state == card_states.Waiting || current_state == card_states.Hand))
+		if (draggable && (current_state == card_states.Waiting || current_state == card_states.Hand || current_state == card_states.Draft))
 		{
 			offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
 		}
@@ -172,7 +177,7 @@ public class Card : MonoBehaviour {
 			{held_in.arrange_cards();return;}
 
 		// move the card
-		if (draggable && (current_state == card_states.Waiting || current_state == card_states.Hand))
+		if (draggable && (current_state == card_states.Waiting || current_state == card_states.Hand || current_state == card_states.Draft))
 		{
 			Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
 			Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
@@ -227,6 +232,19 @@ public class Card : MonoBehaviour {
 			}
 
 			held_in.arrange_cards(); // Always arrange yourself so you snap back to your attack point and begin attacking.
+		}
+		else if (current_state == card_states.Draft)
+		{
+			BoxCollider2D collider = gameObject.GetComponent<BoxCollider2D>();
+			Collider2D[] items_overlapped = Physics2D.OverlapAreaAll(collider.bounds.min, collider.bounds.max);
+			foreach (Collider2D hit in items_overlapped)
+			{
+				if (hit.tag == "Draft_Deck")
+				{
+					hit.GetComponent<card_library>().master_card_list.Add(original_stats);
+					gameObject.SetActive(false);
+				}
+			}
 		}
 		else{
 			held_in.arrange_cards();

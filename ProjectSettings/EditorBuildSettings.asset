@@ -8,3 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Main_Board.unity
     guid: 0d38cb3d3b62272468bcf93873f166ac
+  - enabled: 1
+    path: Assets/Draft_Screen.unity
+    guid: d6756744f59ad1d41b9a19b73e0328d0
+  - enabled: 1
+    path: Assets/Main_Menu.unity
+    guid: 824b1aa73eb3943418e136ac9fee8be6

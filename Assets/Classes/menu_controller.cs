@@ -11,7 +11,7 @@ public class menu_controller : MonoBehaviour {
 	List<GameObject> cards;
 
 	public void onPlayClick(){
-		SceneManager.LoadScene("Main_Board");
+		SceneManager.LoadScene("Draft_Screen");
 	}
 	public void onQuitClick(){
 		Application.Quit();

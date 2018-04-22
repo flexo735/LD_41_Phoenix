@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Health_Node
+  - Draft_Deck
+  - Not_Destroyed
   layers:
   - Default
   - TransparentFX

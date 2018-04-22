@@ -26,6 +26,8 @@ public class Player_Hand : card_spot {
 
 	public Radial_Countdown_Timer mouse_timer;
 
+	public Text deck_size_text;
+
 
 
 	// Use this for initialization
@@ -33,7 +35,15 @@ public class Player_Hand : card_spot {
 	{
 		health_text.text = "Health: " + health_value.ToString();
 
-		our_cards = gameObject.GetComponent<card_library>();
+		if (is_person)
+		{
+			our_cards = GameObject.FindWithTag("Not_Destroyed").GetComponent<deck_holder>().the_deck;
+		}
+		else
+		{
+			our_cards = gameObject.GetComponent<card_library>();
+		}
+
 
 		for (int counter = 0; counter < starting_hand_size; counter++){
 			draw_card(false);
@@ -81,7 +91,7 @@ public class Player_Hand : card_spot {
 
 	public void draw_card(bool lock_out_after)
 	{
-		if (!locked_out)
+		if (!locked_out && our_cards.master_card_list.Count > 0)
 		{
 			GameObject new_card = Instantiate(basic_card_prefab);
 			Card card_object = new_card.GetComponent<Card>();
@@ -91,18 +101,25 @@ public class Player_Hand : card_spot {
 			current_hand.Add(new_card);
 			card_object.draggable = is_person;
 			card_object.controlling_player = this;
+
+			our_cards.master_card_list.Remove(card_object.original_stats); //Remove a single instance of the card from our library
+
 			arrange_cards();
 
 			if (lock_out_after)
 			{
 				set_lockout(4.0f);
 			}
+
+			deck_size_text.text = our_cards.master_card_list.Count.ToString() + " Cards";
 		}
 	}
 
 	public void take_damage(int amount)
 	{
 		health_value -= amount;
+		if (health_value < 0)
+			health_value = 0;
 		health_text.text = "Health: " + health_value.ToString();
 	}
 
