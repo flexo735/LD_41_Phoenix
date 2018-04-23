@@ -18,7 +18,6 @@ public class menu_controller : MonoBehaviour {
 	}
 	public void onQuitClick(){
 		Application.Quit();
-		UnityEditor.EditorApplication.isPlaying = false;
 	}
 
 	public void Start(){
