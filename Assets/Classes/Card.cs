@@ -94,9 +94,19 @@ public class Card : MonoBehaviour {
 			}
 		}
 
+		// Keep the Cards on the screen
 		else if (current_state == card_states.Hand){
-			if(transform.position.y + gameCamera.orthographicSize < 1.0f * transform.localScale.y){
+			if(transform.position.y > gameCamera.orthographicSize - 1.0f * transform.localScale.y){
+				transform.position = new Vector3(transform.position.x, gameCamera.orthographicSize - 1.0f * transform.localScale.y, transform.position.z);
+			}
+			else if(transform.position.y < 1.0f * transform.localScale.y - gameCamera.orthographicSize){
 				transform.position = new Vector3(transform.position.x, 1.0f * transform.localScale.y - gameCamera.orthographicSize, transform.position.z);
+			}
+			if(transform.position.x > gameCamera.orthographicSize * gameCamera.aspect - 0.75f * transform.localScale.x){
+				transform.position = new Vector3(gameCamera.orthographicSize * gameCamera.aspect - 0.75f * transform.localScale.x, transform.position.y, transform.position.z);
+			}
+			else if(transform.position.x < 0.75f * transform.localScale.x - gameCamera.orthographicSize * gameCamera.aspect){
+				transform.position = new Vector3(0.75f * transform.localScale.x - gameCamera.orthographicSize * gameCamera.aspect, transform.position.y, transform.position.z);
 			}
 		}
 

@@ -38,7 +38,7 @@ public class menu_controller : MonoBehaviour {
 			new_card.card = Instantiate(basic_card_prefab);
 			Card card_object = new_card.card.GetComponent<Card>();
 			card_object.draggable = true;
-			card_object.current_state = Card.card_states.Hand;
+			card_object.current_state = Card.card_states.Draft;
 			card_object.assign_type(library.master_card_list[Random.Range(0, library.master_card_list.Count)]);
 			new_card.card.transform.SetPositionAndRotation(new Vector3(menuCamera.aspect * menuCamera.orthographicSize + 1.5f, 0.0f, 0.0f), Quaternion.identity);
 			new_card.rotationOffset = Random.Range(0.0f, 360.0f);
@@ -49,7 +49,7 @@ public class menu_controller : MonoBehaviour {
 			new_card.card = Instantiate(basic_card_prefab);
 			card_object = new_card.card.GetComponent<Card>();
 			card_object.draggable = true;
-			card_object.current_state = Card.card_states.Hand;
+			card_object.current_state = Card.card_states.Draft;
 			card_object.assign_type(library.master_card_list[Random.Range(0, library.master_card_list.Count)]);
 			new_card.card.transform.SetPositionAndRotation(new Vector3(-menuCamera.aspect * menuCamera.orthographicSize - 1.5f, 3.0f, 0.0f), Quaternion.identity);
 			new_card.rotationOffset = Random.Range(0.0f, 360.0f);
@@ -60,7 +60,7 @@ public class menu_controller : MonoBehaviour {
 			new_card.card = Instantiate(basic_card_prefab);
 			card_object = new_card.card.GetComponent<Card>();
 			card_object.draggable = true;
-			card_object.current_state = Card.card_states.Hand;
+			card_object.current_state = Card.card_states.Draft;
 			card_object.assign_type(library.master_card_list[Random.Range(0, library.master_card_list.Count)]);
 			new_card.card.transform.SetPositionAndRotation(new Vector3(-menuCamera.aspect * menuCamera.orthographicSize - 1.5f, -3.0f, 0.0f), Quaternion.identity);
 			new_card.rotationOffset = Random.Range(0.0f, 360.0f);
