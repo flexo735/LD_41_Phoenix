@@ -288,7 +288,6 @@ public class Card : MonoBehaviour {
 
 				else if (hit.gameObject.GetComponent<Card>() != null && hit.gameObject.GetComponent<Card>().controlling_player != this.controlling_player && hit.gameObject.GetComponent<Card>().current_state == card_states.Attacking)
 				{
-					//TODO: if we've been played on an attacking card we defend against it.
 					defend_against_attack(hit.gameObject.GetComponent<Card>());
 					break;
 				}
