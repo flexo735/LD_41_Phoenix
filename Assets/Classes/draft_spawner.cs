@@ -52,7 +52,7 @@ public class draft_spawner : MonoBehaviour {
 		if (draft_time <= 0 && drafting)
 		{
 			drafting = false;
-			time_text.text = "Last Chance!";
+			time_text.text = "Last Chance! Starting match in " + after_draft_time.ToString("#0");
 		}
 		else if (drafting)
 		{

@@ -89,14 +89,13 @@ public class AI : Player_Hand {
 	
 
 	private AIDecision makeDecision(){
-		if(current_hand.Count == 0){
+		if(current_hand.Count == 0 && our_cards.master_card_list.Count > 0){
 			return AIDecision.draw;
 		}
 		float[,] confidence = new float[AI_Attack_Spots.Count, player_Attack_Spots.Count];
 		int bestDefenceCard = -1;
 		int bestDefenceTarget = -1;
 		int bestAttackCard = -1;
-		int bestAttackTarget = -1;
 		int bestAttackPower = -1;
 		float bestDefenceConfidence = -10.0f;
 		float bestAttackConfidence = -10.0f;
@@ -108,7 +107,9 @@ public class AI : Player_Hand {
 		for(int d = 0; d < AI_Attack_Spots.Count; d++){
 			if(!AI_Attack_Spots[d].currently_holding)
 			{
-				return AIDecision.defend1 + d;
+				if(current_hand.Count > 0)
+					return AIDecision.defend1 + d;
+				continue;
 			}
 			Card AICard = AI_Attack_Spots[d].currently_holding.GetComponent<Card>();
 			if(AICard.current_state != Card.card_states.Waiting)
@@ -162,7 +163,9 @@ public class AI : Player_Hand {
 			{
 				for(int d = 0; d < player_Attack_Spots.Count; d++)
 					confidence[d,a] = -10.0f;
-				return AIDecision.attack1 + a;
+				if(current_hand.Count > 0)
+					return AIDecision.attack1 + a;
+				continue;
 			}
 			Card AICard = AI_Attack_Spots[a].currently_holding.GetComponent<Card>();
 			if(AICard.current_state != Card.card_states.Waiting){
@@ -201,7 +204,6 @@ public class AI : Player_Hand {
 				}
 				if(confidence[d,a] > bestAttackConfidence){
 					bestAttackCard = a;
-					bestAttackTarget = d;
 					bestAttackConfidence = confidence[d,a];
 				}
 			}
@@ -335,7 +337,6 @@ public class AI : Player_Hand {
 		// Make a decision every interval, with a bit of random delay so it seems more human
 		if(Time.time > timeUntilNextDecision){
 			AIDecision choice = makeDecision();
-			Debug.Log("The AI decided to " + choice.ToString());
 			if(choice == AIDecision.draw)
 			{
 				AIDraw();

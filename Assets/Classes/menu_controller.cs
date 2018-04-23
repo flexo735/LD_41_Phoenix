@@ -13,6 +13,9 @@ public class menu_controller : MonoBehaviour {
 	public void onPlayClick(){
 		SceneManager.LoadScene("Draft_Screen");
 	}
+	public void onHowClick(){
+		SceneManager.LoadScene("Tutorial_Board");
+	}
 	public void onQuitClick(){
 		Application.Quit();
 		UnityEditor.EditorApplication.isPlaying = false;
@@ -67,7 +70,7 @@ public class menu_controller : MonoBehaviour {
 			new_card.speed = 0.01f;
 			cards.Add(new_card);
 		}
-		List<spinner> spinnersToDestroy =  new List<spinner>();
+
 		for(int i = 0; i < cards.Count; i++){
 			cards[i].card.transform.SetPositionAndRotation(cards[i].card.transform.position + new Vector3(cards[i].speed, 0.0f, 0.0f), Quaternion.AngleAxis(cards[i].rotationOffset - Time.time * 3, Vector3.back));
 			if(Mathf.Abs(cards[i].card.transform.position.x) > menuCamera.aspect * menuCamera.orthographicSize + 3.0f)

@@ -258,7 +258,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 258729890}
-        m_MethodName: onPlayClick
+        m_MethodName: onHowClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -961,8 +961,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 487740646}
-  - component: {fileID: 487740645}
   - component: {fileID: 487740644}
+  - component: {fileID: 487740645}
   m_Layer: 0
   m_Name: Audio Source
   m_TagString: Untagged
@@ -1396,6 +1396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f8f486d0f4c794782f70d3929ba125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 1
   the_deck: {fileID: 0}
 --- !u!4 &1338486587
 Transform:

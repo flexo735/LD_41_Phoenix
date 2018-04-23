@@ -35,9 +35,11 @@ public class Player_Hand : card_spot {
 	{
 		health_text.text = "Health: " + health_value.ToString();
 
-		if (is_person)
+		if (is_person && GameObject.FindWithTag("Not_Destroyed"))
 		{
 			our_cards = GameObject.FindWithTag("Not_Destroyed").GetComponent<deck_holder>().the_deck;
+			if(our_cards == null)
+				our_cards = gameObject.GetComponent<card_library>();
 		}
 		else
 		{
