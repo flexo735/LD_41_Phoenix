@@ -30,7 +30,7 @@ public class draft_spawner : MonoBehaviour {
 		spawnable_cards = gameObject.GetComponent<card_library>();
 		draft_cam = Camera.main;
 
-		time_text.text = draft_time.ToString("D#0") + " Seconds Remaining!";
+		time_text.text = draft_time.ToString("#0.0") + " Seconds Remaining!";
 	}
 	
 	// Update is called once per frame
@@ -53,11 +53,15 @@ public class draft_spawner : MonoBehaviour {
 		if (draft_time <= 0 && drafting)
 		{
 			drafting = false;
-			time_text.text = "Last Chance! Starting match in " + after_draft_time.ToString("#0");
+			time_text.text = "Last Chance! Starting match in " + after_draft_time.ToString("#0.0");
 		}
 		else if (drafting)
 		{
 			time_text.text = draft_time.ToString("#0.0") + " Seconds Remaining!";
+		}
+		else
+		{
+			time_text.text = "Last Chance! Starting match in " + after_draft_time.ToString("#0.0");
 		}
 			
 
