@@ -335,7 +335,7 @@ public class Card : MonoBehaviour {
 	void finish_attack(Player_Hand the_target)
 	{
 		the_target.take_damage(attack_power);
-		set_movement_target(the_target.gameObject,0.5f);
+		set_movement_target(the_target.gameObject,0.2f);
 	}
 
 	public void defend_against_attack(Card enemy_card)
@@ -368,6 +368,8 @@ public class Card : MonoBehaviour {
 			current_state = card_states.Cooldown;
 
 			timer_bar.enabled = true;
+
+			set_movement_target(enemy_card.gameObject, 0.2f);
 		}
 	}
 
