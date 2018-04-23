@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player_Hand : card_spot {
 
@@ -37,9 +38,10 @@ public class Player_Hand : card_spot {
 
 		if (is_person && GameObject.FindWithTag("Not_Destroyed"))
 		{
-			our_cards = GameObject.FindWithTag("Not_Destroyed").GetComponent<deck_holder>().the_deck;
-			if(our_cards == null)
+			if(SceneManager.GetActiveScene().name == "Tutorial_Board")
 				our_cards = gameObject.GetComponent<card_library>();
+			else
+				our_cards = GameObject.FindWithTag("Not_Destroyed").GetComponent<deck_holder>().the_deck;
 		}
 		else
 		{

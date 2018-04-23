@@ -42,6 +42,7 @@ public class draft_spawner : MonoBehaviour {
 		else
 		{
 			after_draft_time -= Time.deltaTime;
+			time_text.text = "Last Chance! Starting match in " + after_draft_time.ToString("#0");
 			if (after_draft_time <= 0)
 			{
 				GameObject.FindWithTag("Not_Destroyed").GetComponent<deck_holder>().the_deck = drafted_pile.the_deck; //Store the drafted deck in an object that isn't destroyed when we change scenes.
