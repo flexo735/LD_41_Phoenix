@@ -60,6 +60,13 @@ public class Card : MonoBehaviour {
 	//Used for drafts//
 	public raw_card_stats original_stats;
 
+	//Used for attack, defence movement//
+	private bool lerp_move = false;
+	private Vector3 move_target;
+	private Vector3 start_position;
+	private float time_into_move = 0;
+	private float move_full_time = 0;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -108,16 +115,19 @@ public class Card : MonoBehaviour {
 		if (current_state == card_states.Cooldown)
 		{
 			timer_text.text = "Cooldown";
+			timer_text.color = Color.blue;
 		}
 		else if (current_state == card_states.Attacking)
 		{
 			timer_text.text = "Attacking!";
+			timer_text.color = Color.red;
 		}
 		else if (current_state == card_states.Waiting)
 		{
 			timer_text.text = "Ready";
+			timer_text.color = Color.green;
 		}
-		if(held_in.GetType() == typeof(AI)){
+		if(held_in != null && held_in.GetType() == typeof(AI)){
 			card_art.enabled = false;
 			type_art.enabled = false;
 			card_front.enabled = false;
@@ -130,6 +140,20 @@ public class Card : MonoBehaviour {
 			textCanvas.enabled = true;
 			card_back.enabled = false;
 		}
+
+		if (lerp_move)
+		{
+			time_into_move += Time.deltaTime;
+			if (time_into_move >= move_full_time)
+			{
+				finish_lerp_move();
+			}
+			else
+			{
+				transform.position = Vector3.Lerp(start_position,move_target,time_into_move/move_full_time);
+			}
+		}
+
 	}
 
 	public void assign_type(raw_card_stats this_card_type)
@@ -298,6 +322,7 @@ public class Card : MonoBehaviour {
 	void finish_attack(Player_Hand the_target)
 	{
 		the_target.take_damage(attack_power);
+		set_movement_target(the_target.gameObject,0.5f);
 	}
 
 	public void defend_against_attack(Card enemy_card)
@@ -341,5 +366,20 @@ public class Card : MonoBehaviour {
 			held_in.GetComponent<combat_spot>().currently_holding = null;
 		}
 		GameObject.Destroy(gameObject);
+	}
+
+	void set_movement_target(GameObject the_target, float move_over_time)
+	{
+		lerp_move = true;
+		time_into_move = 0;
+		move_full_time = move_over_time;
+		move_target = the_target.transform.position;
+		start_position = gameObject.transform.position;
+	}
+
+	void finish_lerp_move()
+	{
+		lerp_move = false;
+		transform.position = start_position;
 	}
 }
