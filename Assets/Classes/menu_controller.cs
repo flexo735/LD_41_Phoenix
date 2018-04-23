@@ -8,7 +8,7 @@ public class menu_controller : MonoBehaviour {
 	public GameObject basic_card_prefab;
 	public card_library library;
 	int cardTimer = 0;
-	List<GameObject> cards;
+	List<spinner> cards;
 
 	public void onPlayClick(){
 		SceneManager.LoadScene("Draft_Screen");
@@ -19,9 +19,14 @@ public class menu_controller : MonoBehaviour {
 	}
 
 	public void Start(){
-		cards = new List<GameObject>();
+		cards = new List<spinner>();
 	}
 
+	private struct spinner{
+		public GameObject card;
+		public float rotationOffset;
+		public float speed;
+	}
 
 	// Spawn some cards and make 'em spin!!
 	public void FixedUpdate(){
@@ -29,33 +34,47 @@ public class menu_controller : MonoBehaviour {
 		if(cardTimer < 0){
 			cardTimer = 300;
 			
-			GameObject new_card = Instantiate(basic_card_prefab);
-			Card card_object = new_card.GetComponent<Card>();
+			spinner new_card = new spinner();
+			new_card.card = Instantiate(basic_card_prefab);
+			Card card_object = new_card.card.GetComponent<Card>();
 			card_object.draggable = true;
 			card_object.current_state = Card.card_states.Hand;
 			card_object.assign_type(library.master_card_list[Random.Range(0, library.master_card_list.Count)]);
-			new_card.transform.SetPositionAndRotation(new Vector3(menuCamera.aspect * menuCamera.orthographicSize + 1.5f, -1.0f, 0.0f), Quaternion.identity);
+			new_card.card.transform.SetPositionAndRotation(new Vector3(menuCamera.aspect * menuCamera.orthographicSize + 1.5f, 0.0f, 0.0f), Quaternion.identity);
+			new_card.rotationOffset = Random.Range(0.0f, 360.0f);
+			new_card.speed = -0.01f;
+			cards.Add(new_card);
+
+			new_card = new spinner();
+			new_card.card = Instantiate(basic_card_prefab);
+			card_object = new_card.card.GetComponent<Card>();
+			card_object.draggable = true;
+			card_object.current_state = Card.card_states.Hand;
+			card_object.assign_type(library.master_card_list[Random.Range(0, library.master_card_list.Count)]);
+			new_card.card.transform.SetPositionAndRotation(new Vector3(-menuCamera.aspect * menuCamera.orthographicSize - 1.5f, 3.0f, 0.0f), Quaternion.identity);
+			new_card.rotationOffset = Random.Range(0.0f, 360.0f);
+			new_card.speed = 0.01f;
+			cards.Add(new_card);
+
+			new_card = new spinner();
+			new_card.card = Instantiate(basic_card_prefab);
+			card_object = new_card.card.GetComponent<Card>();
+			card_object.draggable = true;
+			card_object.current_state = Card.card_states.Hand;
+			card_object.assign_type(library.master_card_list[Random.Range(0, library.master_card_list.Count)]);
+			new_card.card.transform.SetPositionAndRotation(new Vector3(-menuCamera.aspect * menuCamera.orthographicSize - 1.5f, -3.0f, 0.0f), Quaternion.identity);
+			new_card.rotationOffset = Random.Range(0.0f, 360.0f);
+			new_card.speed = 0.01f;
 			cards.Add(new_card);
 		}
+		List<spinner> spinnersToDestroy =  new List<spinner>();
 		for(int i = 0; i < cards.Count; i++){
-			cards[i].transform.SetPositionAndRotation(cards[i].transform.position + new Vector3(-0.01f, 0.0f, 0.0f), Quaternion.AngleAxis(i * 60 - Time.time * 3, Vector3.back));
-		}
-		if(cards.Count >= 6)
-		{
-			if(-cards[5].transform.position.x > menuCamera.aspect * menuCamera.orthographicSize + 1)
+			cards[i].card.transform.SetPositionAndRotation(cards[i].card.transform.position + new Vector3(cards[i].speed, 0.0f, 0.0f), Quaternion.AngleAxis(cards[i].rotationOffset - Time.time * 3, Vector3.back));
+			if(Mathf.Abs(cards[i].card.transform.position.x) > menuCamera.aspect * menuCamera.orthographicSize + 3.0f)
 			{
-				GameObject.Destroy(cards[0], 0.01f);
-				GameObject.Destroy(cards[1], 0.01f);
-				GameObject.Destroy(cards[2], 0.01f);
-				GameObject.Destroy(cards[3], 0.01f);
-				GameObject.Destroy(cards[4], 0.01f);
-				GameObject.Destroy(cards[5], 0.01f);
-				cards.Remove(cards[0]);
-				cards.Remove(cards[0]);
-				cards.Remove(cards[0]);
-				cards.Remove(cards[0]);
-				cards.Remove(cards[0]);
-				cards.Remove(cards[0]);
+				GameObject.Destroy(cards[i].card);
+				cards.RemoveAt(i);
+				i--;
 			}
 		}
 	}

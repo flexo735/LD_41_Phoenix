@@ -6,6 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(BoxCollider2D))]
 
 public class Card : MonoBehaviour {
+	public static Camera gameCamera;
 
 
 	//Key card stats//
@@ -24,6 +25,7 @@ public class Card : MonoBehaviour {
 	public SpriteRenderer card_back;
 
 	public Canvas textCanvas;
+
 
 	public Text name_text;
 	public Text attack_power_text;
@@ -70,7 +72,9 @@ public class Card : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		
+		if(!gameCamera){
+			gameCamera = GameObject.FindObjectOfType(typeof(Camera)) as Camera;
+		}
 	}
 	
 	// Update is called once per frame
@@ -94,6 +98,12 @@ public class Card : MonoBehaviour {
 				current_state = card_states.Waiting;
 				timer_bar.enabled = false;
 				finish_attack(attack_target);
+			}
+		}
+
+		else if (current_state == card_states.Hand){
+			if(transform.position.y + gameCamera.orthographicSize < 1.0f * transform.localScale.y){
+				transform.position = new Vector3(transform.position.x, 1.0f * transform.localScale.y - gameCamera.orthographicSize, transform.position.z);
 			}
 		}
 
@@ -127,7 +137,8 @@ public class Card : MonoBehaviour {
 			timer_text.text = "Ready";
 			timer_text.color = Color.green;
 		}
-		if(held_in != null && held_in.GetType() == typeof(AI)){
+
+		if(held_in && held_in.GetType() == typeof(AI)){
 			card_art.enabled = false;
 			type_art.enabled = false;
 			card_front.enabled = false;
@@ -198,6 +209,8 @@ public class Card : MonoBehaviour {
 		card_art.sortingOrder = 1;
 		type_art.sortingOrder = 2;
 		textCanvas.sortingOrder = 2;
+		if(held_in)
+			held_in.arrange_cards();
 	}
 
 	void OnMouseDown() 
