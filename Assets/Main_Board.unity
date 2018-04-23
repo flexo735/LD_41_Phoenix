@@ -361,7 +361,7 @@ MonoBehaviour:
   basic_card_prefab: {fileID: 1751776332428916, guid: af77aa69cf4ef4c479d29152eb72e1af,
     type: 2}
   current_hand: []
-  xoffset_per_card: 2
+  xoffset_per_card: 1.6
   starting_hand_size: 6
   health_value: 50
   health_node: {fileID: 130036188}
@@ -2000,7 +2000,7 @@ MonoBehaviour:
   basic_card_prefab: {fileID: 1751776332428916, guid: af77aa69cf4ef4c479d29152eb72e1af,
     type: 2}
   current_hand: []
-  xoffset_per_card: 2
+  xoffset_per_card: 1.6
   starting_hand_size: 6
   health_value: 50
   health_node: {fileID: 1105954662}

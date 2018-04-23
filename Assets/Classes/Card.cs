@@ -206,11 +206,13 @@ public class Card : MonoBehaviour {
 	}
 
 	void OnMouseEnter(){
-		transform.localScale = new Vector3(2.0f, 2.0f, 1.0f);
-		GetComponent<SpriteRenderer>().sortingOrder = 3;
-		card_art.sortingOrder = 3;
-		type_art.sortingOrder = 4;
-		textCanvas.sortingOrder = 4;
+		if(card_art.enabled){
+			transform.localScale = new Vector3(2.0f, 2.0f, 1.0f);
+			GetComponent<SpriteRenderer>().sortingOrder = 3;
+			card_art.sortingOrder = 3;
+			type_art.sortingOrder = 4;
+			textCanvas.sortingOrder = 4;
+		}
 	}
 
 	void OnMouseExit(){

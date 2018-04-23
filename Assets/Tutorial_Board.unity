@@ -250,7 +250,7 @@ MonoBehaviour:
   basic_card_prefab: {fileID: 1751776332428916, guid: af77aa69cf4ef4c479d29152eb72e1af,
     type: 2}
   current_hand: []
-  xoffset_per_card: 2
+  xoffset_per_card: 1.6
   starting_hand_size: 6
   health_value: 10
   health_node: {fileID: 130036188}
@@ -259,7 +259,7 @@ MonoBehaviour:
   locked_out: 0
   mouse_timer: {fileID: 0}
   deck_size_text: {fileID: 1627210059}
-  startDelay: 7
+  startDelay: 3
   decisionDelay: 1
   decisionUncertainty: 1
   decisionTimer: 0
@@ -1305,7 +1305,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 734395626}
   m_LocalRotation: {x: -0, y: -0, z: -0.9974049, w: 0.07199674}
-  m_LocalPosition: {x: -400, y: -89, z: 26666.668}
+  m_LocalPosition: {x: -400, y: -56, z: 26666.668}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1105073122}
@@ -1816,7 +1816,7 @@ MonoBehaviour:
   basic_card_prefab: {fileID: 1751776332428916, guid: af77aa69cf4ef4c479d29152eb72e1af,
     type: 2}
   current_hand: []
-  xoffset_per_card: 2
+  xoffset_per_card: 1.6
   starting_hand_size: 0
   health_value: 1000
   health_node: {fileID: 1105954662}
@@ -3279,7 +3279,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1966377731}
   m_LocalRotation: {x: -0, y: -0, z: -0.9974049, w: 0.07199674}
-  m_LocalPosition: {x: -400, y: 89, z: 26666.666}
+  m_LocalPosition: {x: -400, y: 41, z: 26666.666}
   m_LocalScale: {x: 0.999914, y: 0.999914, z: 0.9999138}
   m_Children:
   - {fileID: 1271150263}
